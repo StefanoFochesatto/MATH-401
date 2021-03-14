@@ -1,0 +1,233 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+\newcommand{\Irats}{\ensuremath{\mathbb I }}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 10}
+\docauthor{Stefano Fochesatto}
+\docdate{November 10, 2020}
+
+\begin{document}
+
+\begin{exercise}{Abbott 4.5.2} Provide an example of each of the following, or explain why the request is impossible,\\
+
+  \begin{enumerate}
+    \item A continuous function defined on an open interval with range equal to a closed interval\\
+    \solution Suppose a function $sin(x)$ defined on the open interval $(0,2\pi)$. Let 
+    $\epsilon>0$. Now consider some $c \in (0,2\pi)$ and let $\delta = \epsilon$. then for all $x \in (0,2\pi)$, $|x - c|< \delta$ we get that,
+    \begin{align*}
+      |sin(x) - sin(c)| &=  |2cos(\dfrac{x + c}{2})sin(\dfrac{x + c}{2})|\\
+      &\le 2(1)|sin(\dfrac{x + c}{2})|\\
+      &\le 2(1)|\dfrac{x + c}{2}|\\
+      &\le |x + c|\\
+      &< \delta\\
+      &< \epsilon.
+    \end{align*}
+      Now note that the range of $sin(x)$ on the interval $(0,2\pi)$ is $[-1,1]$ a closed interval.
+      \vspace{.25in}
+
+
+
+    \item A continuous function defined on a closed interval with a range equal to an open interval.\\
+    \solution Such a request is impossible. Note that a closed interval is a compact set, by Theorem 4.4.1 (Preservation of Compact Sets) 
+    we know that if the domain of a continuous function is compact then so is the range.
+    \vspace{.25in}
+    
+
+
+    \item A continuous function defined on an open interval with range equal to an unbounded closed set different 
+    from $\Reals$.\\
+     \solution Consider the function $f(x) = |tan(x)|$ defined by $f:(-\frac{pi}{2},\frac{pi}{2}) \to \Reals$. Note that the 
+     range of $f$ is $[0, \infty)$ which is an unbounded closed set different from $\Reals$.
+     \vspace{.25in}
+
+
+  
+     \item A continuous function defined on all of $\Reals$ with a range equal to $\Rats$\\
+     \solution Such a request is impossible. Suppose for the sake of contradiction that there exists a function $f$ defined on all $\Reals$
+such that the range of $f$ was equal to $\Rats$. Consider some set $K \subseteq \Reals$ such that $K = [a,b]$. By Theorem 4.4.1 $f(K) = [f(a), f(b)]$.
+By the density of $\Irats$ in $\Reals$ there exists some $i \in \Irats$ such that $i \in f(K)$. Thus the range of $f$ is not equal to $\Rats$.
+
+  \end{enumerate}
+
+\end{exercise}
+\vspace{.5in}
+
+\begin{exercise}{Abbott 4.5.5 (b)}
+
+You may assume that you have found a sequence of nested intervals $I_k=[a_k,b_k]$ with $f(a_k)<0$ and $f(b_k)\ge 0$ and $|I_{k+1}|=|I_k|/2$,
+where $|\cdot|$ denotes the length of the interval.
+
+For those of you in Numerical Analysis, this proof of the IVT 
+mirrors the bisection method for finding roots!\\
+
+
+\begin{proof}
+  Consider the case where $L = 0$ and we suppose that $f(a) < 0 < f(b)$. As described in the text we have constructed
+  a series of nested intervals $I_k=[a_k,b_k]$ with $f(a_k)<0$ and $f(b_k)\geq 0$ and $|I_{k+1}|=|I_k|/2$. By the Nested Interval Property
+  we know that,
+  \begin{equation*}
+    \bigcap_{n = 0}^{\infty} I_n \neq \emptyset
+  \end{equation*}
+  Let $c \in \cap_{n = 0}^{\infty} I_n$. Also note that by the NIP that the sequences $a_k \to c$, $b_k \to c$.
+  Since $f$ is continuous by the sequential criteria for continuity we know that $f(a_k) \to f(c)$ and $f(b_k) \to f(c)$. Recall that by the construciton of our intervals $I_k$ the inequality,
+  \begin{equation*}
+    f(a_k) < 0 \le f(b_k),
+  \end{equation*} 
+  holds for all $k \in \Nats$. Finally by the squeeze theorem we get that
+  \begin{equation*}
+    f(c) \le 0 \le f(c),
+  \end{equation*}
+  and so $f(c) = 0$. 
+\end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+\begin{exercise}{Abbott 4.4.3} Show that $f(x) = 1/x^2$ is uniformly continuous on the set $[1, \infty)$ but not on the set $(0,1]$\\
+  \begin{proof}
+    Consider some function on $f: [1, \infty) \to \Reals$  defined by $f(x) = 1/x^2$ and let $c \in [1, \infty)$. Consider the following,
+    \begin{equation*}
+      |f(x) - f(c)| = |\dfrac{1}{x^2} - \dfrac{1}{c^2}| = |\dfrac{x^2 - c^2}{x^2c^2}| = \dfrac{(x+c)|x - c|}{x^2c^2}. 
+    \end{equation*}
+    Note that on the domain of $[1, \infty)$, $\dfrac{(x+c)}{x^2c^2}$ is bounded above by 2 which gives us that,
+    \begin{equation*}
+      |f(x) - f(c)| \le 2|x - c|.
+    \end{equation*}
+    Let $\epsilon > 0$. Choose $\delta = \epsilon/2$. Then, $|x - c|< \delta$ implies,
+    \begin{equation*}
+      |f(x) - f(c)| \le 2|x - c| < 2\dfrac{\epsilon}{2} = \epsilon.
+    \end{equation*}
+  \end{proof} 
+
+  \begin{proof}
+    Consider some function on $f: (0,1] \to \Reals$  defined by $f(x) = 1/x^2$. Consider the sequences $x_n,y_n \in (0,1]$ where 
+    $x_n = \frac{1}{n}$ and $y_n = \frac{1}{n^2}-\frac{1}{n}$. Now consider the following sequence,
+    \begin{equation*}
+      |x_n - y_n| = \dfrac{1}{n} - (\dfrac{1}{n^2}-\dfrac{1}{n}) = \dfrac{1}{n^2}.
+    \end{equation*} 
+    Note that $|x_n - y_n| \to 0$. Now consider the function limit 
+    \begin{align*}
+      |f(x_n) - f(y_n)| &= |\dfrac{1}{\dfrac{1}{n^2}} - \dfrac{1}{(\dfrac{1}{n^2} - \dfrac{1}{n})^2}|\\
+      &= |\dfrac{1}{\dfrac{1}{n^2}} - \dfrac{1}{\dfrac{1}{n^4} - \dfrac{2}{n^3} + \dfrac{1}{n^2}}|\\
+      &= |n^2 - (n^4 - \dfrac{n^3}{2} + n^2)|\\
+      &= |-n^4 + \dfrac{n^3}{2}|.
+    \end{align*}
+    Clearly this limit is divergent, note that $|f(x_n) - f(y_n)| \geq \frac{1}{2}$ for all $n \geq 1$. Thus by the Theorem 4.4.5 (Sequential Criterion for Absence of Uniform Continuity) we know that
+    $f$ is not uniformly continuous on  $(0,1]$
+  \end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+\begin{exercise}{Abbott 4.2.10} Introductory calculus courses typically refer to the right-hand limit of a function as the limit obtained by 
+  "letting $x$ approach $a$ form the right-hand side."
+  \begin{enumerate}
+    \item Give a proper definition in the style of Definition 4.2.1 for the right-hand and left-hand limit statements,
+    \begin{equation*}
+      \lim_{x \to a^+} f(x) = L
+    \end{equation*}
+    \begin{equation*}
+      \lim_{x \to a^-} f(x) = L
+    \end{equation*}
+    \solution Let $f: A \to \Reals$, and let $c$ be a limit point of the domain $A$. We say that $\lim_{x \to a^+} f(x) = L$ provided that , for all 
+    $\epsilon >0$, there exists a $\delta > 0$ such that whenever $0 < c - x < \delta$ (and $x \in A$) it follows that $|f(x) - L| < \epsilon$. \\
+
+    Similarly we sat that  $\lim_{x \to a^-} f(x) = L$ provided that , for all 
+    $\epsilon >0$, there exists a $\delta > 0$ such that whenever $0 < x - c < \delta$ (and $x \in A$) it follows that $|f(x) - L| < \epsilon$. \\
+
+   \end{enumerate}
+   \vspace{.25in}
+
+
+   \item Prove that $\lim_{x \to a} f(x) = L$ if and only if both right and left-hand limits equal $L$\\
+   \begin{proof}
+     Suppose a function  $f: A \to \Reals$ with the property that $\lim_{x \to a} f(x) = L$. By the definition of the Functional Limit we know that for all $\epsilon > 0$
+     there exists a $\delta > 0$ such that whenever $0 <|x - c|<\delta$ we get that $|f(x) - L| < \epsilon$. Consider the case where $x < c$ then we get the inequality $0 < x - c < \delta$ and therefore by 
+     definition  $\lim_{x \to a^-} f(x) = L$. Now consider the case where $x > c$ we get the inequality $0 < c - x < \delta$ and therefore by definition $\lim_{x \to a^+} f(x) = L$.\\
+
+
+     Suppose a function  $f: A \to \Reals$ with the property that $ \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$. By definition this gives us that for all 
+     $\epsilon >0$, there exists a $\delta > 0$ such that whenever $0 < c - x < \delta$ or $0 < x - c < \delta$ it follows that $|f(x) - L| < \epsilon$. Note that $0 < c - x < \delta$ or $0 < x - c < \delta$ implies that $0 <|x - c|<\delta$
+     thus by definition $\lim_{x \to a} f(x) = L$.
+   \end{proof}
+
+
+
+\end{exercise}
+
+
+\end{document}

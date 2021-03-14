@@ -1,0 +1,287 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 8}
+\docauthor{Stefano Fochesatto}
+\docdate{October 26, 2020}
+
+\begin{document}
+
+\begin{exercise}{Abbott 4.2.1 a,b}
+\begin{enumerate}
+  \item Supply the details for how Corollary 4.2.4ii follows from the Sequential Criterion for Functional
+  Limit Theorem for sequences proved in Chapter 2.\\
+
+  \begin{proof} Suppose $f$ and $g$ are functions defined on the domain $A \subseteq \Reals$, and lets assume that 
+    for some point $c \in A$,
+    \begin{equation*}
+      \lim_{x \to c} f(x) = L,
+    \end{equation*} 
+    \begin{equation*}
+      \lim_{x \to c} g(x) = M.
+    \end{equation*} 
+    By Theorem 4.2.3 (Sequential Criterion for Functional Limits) we know that for all sequences $(x_n) \subseteq A$
+    which satisfy $x_n \neq c$ and $(x_n) \to c$, it must be the case that,
+    \begin{equation*}
+      f(x_n) \to L,
+    \end{equation*}
+    \begin{equation*}
+      g(x_n) \to M.
+    \end{equation*}
+    By the ALT we know that when we sum these sequences, the limit becomes the sum of the limits, therefore for all $(x_n) \subseteq A$, where $x_n \to c$ and $x_n \neq c$,
+    \begin{equation*}
+      f(x_n) + g(x_n)  \to L + M.
+    \end{equation*}
+    Using Theorem 4.2.3 we get back that,
+    \begin{equation*}
+      \lim_{x \to c} f(x) + g(x) = L + M.
+    \end{equation*} 
+  \end{proof}
+  \vspace{.25 in}
+  
+  
+  \item Now write another proof of Corollary 4.2.4ii directly from Definition 4.2.1 without using the Sequential Criterion
+  in Theorem 4.2.3\\
+
+  \begin{proof}  Suppose $f$ and $g$ are functions defined on the domain $A \subseteq \Reals$, and lets assume that 
+    for some point $c \in A$,
+    \begin{equation*}
+      \lim_{x \to c} f(x) = L,
+    \end{equation*} 
+    \begin{equation*}
+      \lim_{x \to c} g(x) = M.
+    \end{equation*} 
+    By Definition 4.2.1 we know that for all $\epsilon > 0$ there exists a $\delta_f>0$ such that $0 <|x - c|< \delta_f$
+    where it follows that,
+    \begin{equation*}
+      |f(x) - L| < \dfrac{\epsilon}{2}.
+    \end{equation*}
+    Similarly we also know that there exists a $\delta_g > 0$ such that $0 <|x - c|< \delta_g$ where it follows that,
+    \begin{equation*}
+      |g(x) - M| < \dfrac{\epsilon}{2}.
+    \end{equation*}
+    Let $\epsilon > 0$ and consider a $\delta = \min\{\delta_f, \delta_g\}$ to ensure we can fit inside the tolerance $\epsilon$. Therefore whenever $0 <|x - c|< \delta$ we get,
+    \begin{align*}
+      |(f(x) + g(x)) - (L + M)| &= |f(x) + g(x)  - L - M|,\\
+      &= |f(x)- L + g(x) - M|,\\
+      &\leq |f(x)- L| + |g(x) - M|,\\
+      &< \dfrac{\epsilon}{2} + \dfrac{\epsilon}{2},\\
+      &< \epsilon. 
+    \end{align*}
+  \end{proof}
+\end{enumerate}
+\end{exercise}
+\vspace{.5in} 
+
+
+\begin{exercise}{Abbott 4.2.5 a,b} Use Definition 4.2.1 to supply a proper proof for the following statements.\\
+
+  \begin{enumerate}
+    \item $\lim_{x\to 2}(3x+4) = 10$
+    \begin{proof}
+      let $\epsilon > 0$. Through some algebra we get that,
+      \begin{equation*}
+        |3x + 4 - 10| = |3x - 6| = 3|x - 2| 
+      \end{equation*}
+      Now consider $\delta = \frac{\epsilon}{3}$, therefore whenever $0 < |x - 2| < \delta$,
+      \begin{align*}
+        |3x + 4 - 10| &=  3|x - 2|,\\
+          &<3\frac{\epsilon}{3},\\
+          &< \epsilon. 
+      \end{align*}
+    \end{proof}
+
+
+
+
+
+    \item $\lim_{x\to 0} x^3 = 0$
+    \begin{proof}      
+   let $\epsilon > 0$.
+    Now consider $\delta = \epsilon^{\frac{1}{3}}$, therefore whenever $0 < |x - 0| < \delta$,
+    \begin{align*}
+      |x^3| &= |x|^3,\\
+        &<\delta^3,\\
+        &<\epsilon. 
+    \end{align*}
+  \end{proof}
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}{Abbott 4.2.7} Let $g: A \to R$ and assume that $f$ is a bounded function on $A$ in the sense
+that there exists $M>0$ satisfying $|f(x)| \le M$ for all $x \in A$. Show that if $\lim_{x \to c}g(x) = 0$ then 
+$\lim_{x \to c}g(x)f(x) = 0$.\\
+
+\begin{proof}
+  Suppose that $g: A \to R$, where $\lim_{x \to c}g(x) = 0$ and that $f$ is a bounded function on $A$. By the definition of bounded there exists some 
+  $M>0$ such that $|f(x)| \le M$. Note that by Definition 4.2.1 we know that for all $\epsilon > 0$ there exists an $\delta_g > 0$ where for all
+  $0< |x - c| < \delta$,
+  \begin{equation*}
+    |g(x)| < \dfrac{\epsilon}{M}.
+  \end{equation*}
+Now let $\epsilon > 0$ and consider $\delta = \delta_g$, therefore, for all $0< |x - c| < \delta$ 
+\begin{align*}
+  |g(x)f(x)| &=|g(x)||f(x)|,\\
+  &\leq |g(x)|M,\\
+  &< \dfrac{\epsilon}{M}M,\\
+  &< \epsilon.
+\end{align*}
+
+\end{proof}
+
+\vspace{.25in}
+
+\begin{proof} Suppose that $g: A \to R$, where $\lim_{x \to c}g(x) = 0$ and that $f$ is a bounded function on $A$. By the definition of bounded there exists some 
+  $M>0$ such that $|f(x)| \le M$. Consider a sequence $x_n \subseteq A$ and note the following inequality,
+  \begin{equation*}
+    |f(x_n)| \le M
+  \end{equation*}
+therefore $f(x_n)$ must be a bounded sequence. By Theorem 4.2.3 we know that for all $x_n \subseteq A$ where $x_n \neq c$ and $x_n \to c$ 
+that $g(x_n) \to 0$. Recall that in exercise 2.3.9 we showed that for all $x_n$ if $f(x_n)$ and $g(x_n) \to 0$ then $g(x_n)f(x_n) \to 0$ and thus by Theorem 4.2.3
+we know that  $\lim_{x \to c}g(x)f(x) = 0$.
+\end{proof}
+\end{exercise}
+\vspace{.25in}
+
+
+\begin{exercise}{Abbott 4.2.11} Let $f$, $g$, and $h$ satisfy $f(x)\le g(x) \le h(x)$ for all $x$ in some common domain $A$.
+  If $\lim_{x \to c}f(x) \to L$ and $\lim_{x \to c}h(x) \to L$ at some point $c$ of $A$, show that $\lim_{x \to c} g(x) = L$\\
+
+  \begin{proof}
+    Suppose $f$, $g$, and $h$ satisfy $f(x)\le g(x) \le h(x)$ for all $x$ in some common domain $A$ and that $\lim_{x \to c}f(x) \to L$ and $\lim_{x \to c}h(x) \to L$ at some point $c$ of $A$.
+    By Theorem 4.2.3 we know that for all $x_n \subseteq A$ where $x_n \neq c$ and $x_n \to c$ that $f(x_n) \to L$ and $h(x_n) \to L$. Note that for all $x_n \subseteq A$,
+    \begin{equation*}
+      f(x_n) \le g(x_n) \le h(x_n),
+    \end{equation*}   
+    therefore by the Squeeze Theorem we know that $g(x_n) \to L$. Thus it follow by Theorem 4.2.3 that $\lim_{x \to c} g(x) = L$.
+  \end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+\begin{exercise}{Abbott 4.3.3} 
+  \begin{enumerate}
+    \item Supply a proof for Theorem 4.3.9 using the $\epsilon - \delta$ characterization of continuity.\\
+    \begin{proof}
+      Suppose a function $f: A \to \Reals$ and $f: B \to \Reals$ and assume that the range $f(A) = \{f(x): x \in A\}$ is contained in the 
+      domain $B$ so that the composition $g \circ f = g(f(x))$ is defined on $A$. Let $f$ be continuous at point $c \in A$ and $g$ continuous at 
+      $f(c) \in B$. By the continuity of $g$ we know that for all $\epsilon > 0$ there exists a $\delta_g$ such that 
+      whenever $|f(x) - f(c)|< \delta_g$ we know that $|g(f(x)) - g(f(c))|<\epsilon$.
+      By the continuity of $f$ we know that for all tolerances $\delta_g > 0$ there exists a $\delta_f$ such that
+      whenever $|x - c|< \delta_f$ we get that $|f(x) - f(c)| < \delta_g$.
+     Therefore for all $\epsilon$ there exists a $\delta_f$ where whenever $|x - c|< \delta_f$ we know that $|g(f(x)) - g(f(c))|<\epsilon_g$.
+    \end{proof}
+    \vspace{.25in}
+
+
+    \item Give another proof of Theorem 4.3.9 using the Sequential Characterization of Continuity.\\
+    \begin{proof}
+      Suppose a function $f: A \to \Reals$ and $f: B \to \Reals$ and assume that the range $f(A) = \{f(x): x \in A\}$ is contained in the 
+      domain $B$ so that the composition $g \circ f = g(f(x))$ is defined on $A$. Let $a_n$ be a sequence in $A$ where $a_n \to c$. By the
+      Sequential Characterization of Continuity of $f$ we know that $f(a_n) \to f(c)$. By our definition of the range of $f$ we know that the sequence defined by 
+      $f(a_n), f(c) \in B$ therefore by the Sequential Characterization of Continuity of $G$ we have that $g(f(a_n)) \to g(f(a)$. Thus by Theorem 4.3.2 we have shown that the composition $g\circ f$ is continuous at $c$.  
+    \end{proof}
+    \end{enumerate}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+\begin{exercise}{Abbott 4.3.5} Show using Definition 4.3.1 that if $c$ id an isolated point of $A \subseteq \Reals$, then $f: A \to \Reals$
+  is continuous at $c$.\\
+
+\begin{proof} Suppose that $c$ is an isolated point in $A$. By the definition of isolated point we know that there must exist some $V_{\delta}(c)$ 
+  where,
+  \begin{equation*}
+    V_{\delta}(c) \cap A\/\{c\} = \emptyset.
+  \end{equation*}
+  Let $\epsilon > 0$. Consider the $|x - c| < \delta$ where $V_{\delta}(c)$ has the above property. Since $x \in V_{\delta}(c)$ it must be the case that $x = c$ which means
+  \begin{equation*}
+    |f(x) - f(c)| = 0 < \epsilon.
+  \end{equation*}  
+  Thus by definition 4.3.1 $f$ is continuous at point $c$
+\end{proof}
+
+
+
+
+
+\end{exercise}
+
+
+\end{document}

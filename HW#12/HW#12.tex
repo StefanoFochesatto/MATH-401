@@ -1,0 +1,382 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+\newcommand{\Irats}{\ensuremath{\mathbb I}}
+
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 12}
+\docauthor{Stefano Fochesatto}
+\docdate{\today}
+
+\begin{document}
+
+\begin{exercise}{Abbott 7.4.5} Let $f$ and $g$ be integrable functions on $[a,b]$.\\
+	\begin{enumerate}
+		\item Show that if $P$ is any partition of $[a,b]$, then
+		\begin{equation*}
+			U(f+g,P) \le U(f,P) + U(f,P).
+		\end{equation*}
+		\begin{proof}
+
+		First, note the following about the additions of functions,
+		\begin{equation*}
+			(f+g)(x) = f(x) + g(x) \le Max f(x)  +  Max g(x).
+		\end{equation*}
+		Recall the series definition of upper sums for where $M_{f+g,i} = \sup f(x) + f(g)$, $M_{f,i} = \sup f(x)$, and $M_{g,i} = \sup g(x)$, with $x \in \Delta x_i$.
+		\begin{equation*}
+			U(f+g,P) = \sum_{i = 1}^n M_{f+g,i}\Delta x_i.
+		\end{equation*} 
+		Note that by the previous inequality we know that on every sub-interval $I_i$,
+		\begin{equation*}
+			M_{f+g,i} \le M_{f,i} + M_{g,i}.
+		\end{equation*}
+		Thus by substitution we get the following,
+		\begin{align*}
+			U(f+g,P) &= \sum_{i = 1}^n M_{f+g,i}\Delta x_i\\
+			&\le  \sum_{i = 1}^n (M_{f,i} + M_{g,i})\Delta x_i\\
+			&= \sum_{i = 1}^n M_{f,i}\Delta x_i + \sum_{i = 1}^n M_{g,i}\Delta x_i\\
+			U(f,P) + U(f,P).
+		\end{align*}
+					
+	\end{proof}
+
+	As an example for the strict inequality, consider $f(x) = x$ and $g(x) = -x$ on $[-1,1]$. Note that $f+g(x) = 0$, so $U(f+g,P) = 0$.
+	Also note that on each sub-interval $I_i$,
+	\begin{equation*}
+		M_{f,i} + M_{g,i} = f(x_i) + g(x_{1-i}).
+	\end{equation*}
+	Since $f$ and $g$ are strictly increasing and strictly decreasing respectively we know that,
+	\begin{equation*}
+	f(x_i) + g(x_{1-i})>0
+	\end{equation*}
+	Thus we get that $0< U(f,P) + U(f,P)$ and finally that $U(f+g,P) < U(f,P) + U(f,P)$.
+	\vspace{.25in}
+
+
+	\item Review the proof of Theorem 7.4.2(ii), and provide an argument for part (i) of this theorem.\\ 
+	\begin{proof}
+		Suppose $f$ and $g$ are integrable functions on the interval $[a,b]$. Recall that in the previous problem we demonstrated that,
+		\begin{equation*}
+			U(f+g,P) \le U(f,P) + U(g,P).
+		\end{equation*}
+		By a similar argument we will now demonstrate that for all partitions $P$ of $[a,b]$,
+		\begin{equation*}
+			L(f,P) + L(g,P) \le L(f+g,P).
+		\end{equation*}
+		By the definition of the addition of functions we know that,
+		\begin{equation*}
+			(f+g)(x) = f(x) + g(x) \geq Min f(x)  +  Min g(x).
+		\end{equation*}
+		Applying this inequality to our series definition for lower sums we get the following,
+		\begin{equation*}
+		 m_{f,i} + m_{g,i} \le m_{f+g,i}.
+		\end{equation*}
+		Thus,
+		\begin{equation*}
+			L(f,P) + L(g,P) \le L(f+g,P).
+		\end{equation*}
+		Finally we have the following chain inequality for all partitions $P$,
+		\begin{equation*}
+			L(f,P) + L(g,P) \le L(f+g,P) \le U(f+g,P) \le U(f,P) + U(g,P).
+		\end{equation*}
+		Since $f$ and $g$ are both integrable we have that for some partition $P$ of $[a,b]$,
+		\begin{equation*}
+			L(f,P) = U(f,P),
+		\end{equation*}
+		\begin{equation*}
+			L(g,P) = U(g,P),
+		\end{equation*}
+		Thus it must be the case that, 
+		\begin{equation*}
+			L(f+g,P)  =  U(f+g,P)
+		\end{equation*}
+		Therefore $f+g$ is integrable with,
+		\begin{equation*}
+			\int_a^b f+g = U(f+g,P) = U(f,P) + U(g,P) = \int_a^b f + \int_a^b g.
+		\end{equation*}
+	\end{proof}
+	\end{enumerate}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{Abbott 7.5.1}
+	\begin{enumerate}
+		\item Let $f(x) = |x|$ and define $F(x) = \int_{-1}^x f$. Find a piecewise algebraic formula for $F(x)$ for all $x$.
+		Where is $F$ continuous? Where is $f$ differentiable? Where does $F'(x) = f(x)$? \\
+		
+		\solution Consider $f(x) = |x|$ as a piecewise function we get,
+		\begin{equation*}
+			f(x) = 
+			 \begin{cases} 
+				-x & x < 0 \\
+				x & x \geq 0
+			 \end{cases}
+		\end{equation*}	
+
+	Applying our definition of $F$ we get the following piecewise function\\
+	\begin{equation*}
+		F(x) = 
+	 \begin{cases} 
+			\int_{-1}^x -x & x < 0 \\
+			\frac{1}{2} + \int_{0}^x x & x \geq 0
+		 \end{cases}.
+	\end{equation*}
+
+	Using FTC to evaluate the inside integrals we get,
+	
+	\begin{equation*}
+		F(x) = 
+		 \begin{cases} 
+			\frac{1}{2} - \frac{1}{2}x^2 & x < 0 \\
+			\frac{1}{2} + \frac{1}{2}x^2 & x \geq 0
+		 \end{cases}.
+	\end{equation*}
+	By our definition of $F$ through FTC(ii) we get that $F$ is differentiable and continuous everywhere. 
+	With piecewise differentiation we get that for all $x$,
+	\begin{equation*}
+		F'(x) = f(x) = 
+		\begin{cases} 
+		   -x & x < 0 \\
+		   x & x \geq 0
+		\end{cases}
+	\end{equation*}
+	\vspace{.25in}
+
+
+	\item Repeat part 1 with the following function,
+	\begin{equation*}
+		f(x) = 
+		 \begin{cases} 
+			1 & x < 0 \\
+			2 & x \geq 0
+		 \end{cases}
+	\end{equation*}	
+
+	\solution Using our definition of $F$ to get the following piecewise function,
+	\begin{equation*}
+		F(x) = 
+	 \begin{cases} 
+			\int_{-1}^x 1 & x < 0 \\
+			1 + \int_{0}^x 2 & x \geq 0
+		 \end{cases}.
+	\end{equation*}
+	Using FTC(i) to evaluate the inside integrals,  
+	\begin{equation*}
+		F(x) = 
+	 \begin{cases} 
+			x + 1 & x < 0 \\
+			2x + 1 & x \geq 0
+		 \end{cases}.
+	\end{equation*}
+	With our definition of $F$ by FTC(ii) we get that $F$ is is continuous every and differentiable everywhere $f$ is continuous.
+	Thus $F$ is continuous on all $x \neq 0$.   
+	\end{enumerate}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{Abbott 7.5.4} Show that if $f:[a,b] \to \Reals$ is continuous and $\int_a^x f = 0$ for all $x \in [a,b]$,
+	then $f(x) = 0$ everywhere on $[a,b]$. Provide an example to show that this conclusion does not follow if $f$ is not continuous. \\
+
+	\begin{proof}
+		Suppose that $f:[a,b] \to \Reals$ is continuous and $\int_a^x f = 0$ for all $x \in [a,b]$. Let,
+		\begin{equation*}
+			F(x) = \int_a^x f.
+		\end{equation*}
+		Since $f$ is continuous everywhere on $[a,b]$ by FTC(ii) we get that $F'(x) = f(x)$ for all $x \in [a,b]$. Note that $F(x)$ is a constant function therefore it follows that $F'(x) = 0 = f(x)$.
+	\end{proof}
+	For an example where $f$ is not continuous consider the following function on the interval $[0,1]$,
+	\begin{equation*}
+		f(x) = 
+		\begin{cases} 
+			1 & x = \dfrac{1}{n}  \\
+			   0 & otherwise
+			\end{cases}.
+	\end{equation*}
+Clearly the function is discountinuous. We will show that $f$ is Riemann Integrable and that $\int_a^x f = 0$ in the next problem. 
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{Supplemental 1}
+	\vspace{.15in}
+\begin{enumerate}
+	\item Use Theorems 7.3.2 and 7.4.1 to show that
+	if $f$ is continuous on $[a,b]$ except at finitely
+	many points, then $f$ is Riemann integrable.  The proof is by 
+	induction!\\
+
+	\begin{proof}
+		Suppose $f$ is continuous on $[a,b]$ except at finitely at many points $S \subseteq [a,b]$. Note that since $S$ is finite its 
+		elements can be written in the form of $s_1 < s_2 < s_3 < \dots < s_n \in S$. Consider the interval $[a, s_1]$. Note that 
+		$f$ is continuous on $[a, s_1]$ since $[a,s_1] \cap S\/\{s_1\} = \emptyset$. By Theorem 7.2.9 we know that since $f$ continuous on $[a,s_1]$ it is also integrable on $[a,s_1]$.
+		Suppose there exists some valid $n \in \Nats$ where $f$ is integrable on the interval $[a, s_n]$. Consider the interval $[s_n, s_{n+1}]$. Again note that 
+		$f$ is continuous on $[s_n, s_{n+1}]$ since $[s_n, s_{n+1}] \cap S\/\{s_n, s_n+1\} = \emptyset$. By Theorem 7.2.9 $f$ is integrable on $[s_n, s_{n+1}]$. Since 
+		$f$ is integrable on $[a, s_n]$ and $[s_n, s_{n+1}]$, by Theorem 7.4.1 $f$ is integrable on $[a, s_{n+1}]$. Thus by induction we know that 
+		$f$ is integrable on $[a, s_n]$ for all $s_n \in S$ and therefore by Theorem 7.3.2 we get that $f$ is integrable on $[a,b]$.
+	\end{proof}
+\vspace{.25in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	\item Define $g$ on $[0,1]$ by
+	\[
+	g(x) = \begin{cases} 1 & \text{$x=1/n$ for some $n\in\Nats$}\\
+	0& \text{otherwise.}
+	\end{cases}
+	\]
+	Determine (with proof) if $g$ is Riemann integrable or not.\\
+	\begin{proof}
+		
+		Let $\epsilon >0$ and consider the interval $[\epsilon, 1]$. Note that the set of discontinuities in $[\epsilon, 1]$ is finite. 
+		By the previous result we know that $g$ is Riemann integrable on $[\epsilon, 1]$. Now let $P$ be a partition on $[0,1]$ and $P_{\epsilon}$ be a partition on $[\epsilon, 1]$. Note that by the density of the Irrational numbers there exists an $r \in \Irats$ inside every sub-interval $I_i$.
+		Therefore it must follow that for all $P$, and $P_\epsilon$,
+			\begin{equation*}
+			L(f,P) = L(f, P_\epsilon) = 0.
+			\end{equation*}
+			Since $[0,1]$ is a refinement of $[\epsilon, 1]$ by Lemma 7.2.3 we get that,
+			\begin{equation*}
+				U(f, P_\epsilon) \geq U(f, P)
+			\end{equation*}
+			Recall that since $g$ is Riemann integrable on $[\epsilon, 1]$ we know that for some $P_i$ partition of $[\epsilon, 1]$,
+		\begin{equation*}
+			L(f, P_i) = U(f, P_i) = 0.
+		\end{equation*}
+		From the previous inequality it must be the case that,
+		\begin{equation*}
+			U(f, P_i)  =  U(f, P) = L(f,P) = 0 
+		\end{equation*}
+		Thus $g$ is Riemann integrable on $[0,1]$ with a value of $0$.  
+	\end{proof}
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+\end{exercise}
+
+\end{document}

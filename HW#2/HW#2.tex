@@ -1,0 +1,316 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 2}
+\docauthor{Stefano Fochesatto}
+\docdate{\today}
+
+\begin{document}
+
+\begin{exercise}{1.3.9}  
+\begin{enumerate}[(a)]
+\item
+If $\sup A < \sup B$ then show that there exists an element $b\in B$ that is an upper bound for $A$.
+\item Give an example to show that this is not necessarily the case
+if we we only assume $\sup A \le \sup B$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}[Proof (a)] Suppose $\sup A < \sup B$, and let $x = sup A$ and $y = sup B$. First consider 
+  $\sigma$ such that  $0 < \sigma < y-x$, and therefore through algebra, $x < y - \sigma$. By Lemma 1.3.8, we know that
+  $y = \sup B$ then there exists some $b \in B$ such that  $y - \sigma < b$. Thus,
+  \begin{equation*}
+    x < y - \sigma < b < y.
+  \end{equation*} 
+  Since $x$ is an upper bound for $A$ and $x \le b$ then we know that $b$ is also an upper bound for $A$. 
+\end{proof}
+\vspace{.5in}
+Example for (b): When we assume $sup A \le sup B$, consider $A = [0,2]$ and $B = [0,2)$. In this case $sup A = sup B$
+and since any $x \in \RR$ such that $0 \le x < 2$ is also in $A$.
+\vspace{1in}
+
+\begin{exercise}{1.3.11}
+Decide if the following statements are true.  Give a short proof
+for the true statements and a counterexample for the false statements.
+\begin{enumerate}
+\item[\textbf{a.}] If $A$ and $B$ are nonempty, bounded, and satisfy $A\subseteq B$
+then $\sup A\le \sup B$.\\
+
+\textbf{Solution:} (True) Suppose  $A$ and $B$ are nonempty, bounded, and satisfy $A\subseteq B$. Consider $a \in A$, and 
+note that since  $A\subseteq B$ we know that $a \in B$. Note that by definition of upper bound we know that $a \le \sup B$
+and therefore $\sup B$ is an upper bound for the set $A$. Since $\sup A$ is the least upper bound for the set $A$ we get $\sup A\le \sup B$.
+\qed
+\vspace{.5in}
+
+
+\item[\textbf{b.}] If $\sup A< \inf B$ for sets $A$ and $B$, then there exists
+$c\in\Reals$ such that $a<c<b$ for all $a\in A$ and $b\in B$.\\
+
+\textbf{Solution:} (True) Suppose $\sup A < \inf B$ for sets $A$ and $B$. Now consider $c \in \RR$ such
+that,
+\begin{equation*}
+  c = \frac{\sup A + \inf B}{2}
+\end{equation*}
+Note that this produces the following inequality,
+\begin{equation*}
+  \sup A < c < \inf B.
+\end{equation*}
+Therefore by definition we get that for all $a\in A$ and $b\in B$,
+\begin{equation*}
+  a<c<b.
+\end{equation*}
+\qed
+\vspace{.5in}
+
+
+
+
+
+
+\item [\textbf{c.}] If there exists $c\in\Reals$ satisfying $a<c<b$ for all
+$a\in A$ and $b\in B$ then $\sup A< \inf B$. \\
+
+\textbf{Solution:} (False) Let $A = {x \in \RR; x < 1}$ and $ B = {x \in \RR; x > 1}$. Note that $c = 1$ satisfies the inequality
+$a<c<b$, for all $a \in A$ and $b \in B$, while clearly $\sup A = \inf B = 1$.
+\end{enumerate}
+\end{exercise}
+\vspace{1in}
+
+
+
+
+
+
+
+\begin{exercise}{First Edition 1.4.1}
+Recall that $\mathbb{I}$ stands for the set of irrational numbers.
+\begin{enumerate}
+\item[\textbf{a.}] Show that if $a,b\in\Rats$ then $ab$ and $a+b\in\Rats$ as well.\\
+ 
+\textbf{Proof:} Suppose that $a,b\in\Rats$. By definition we know that $a = \frac{i}{j}$ and $b = \frac{n}{m}$ where $i,n \in \Ints$ and $j,m \in \Ints^*$ .
+Consider the following,
+\begin{equation*}
+  ab = \frac{i}{j}\frac{n}{m} = \frac{in}{jm}
+\end{equation*}
+Note that, $in \in \Ints$ and $jm \in \Ints^*$. Therefore, by definition, $ab \in \Rats$. Now consider, 
+\begin{equation*}
+  a+b =  \frac{i}{j}+\frac{n}{m} = \frac{mi + jn}{jm}
+\end{equation*}
+Note that, $mi + jn \in \Ints$ and $jm \in \Ints^*$. Therefore, by definition, $a+b \in \Rats$. 
+\qed
+
+
+\vspace{.5in}
+
+
+
+\item[\textbf{b.}] Show that if $a\in\Rats$ and $t\in\mathbb{I}$ then $a+t\in\mathbb{I}$ and if $a\neq 0$ then $at\in\mathbb{I}$ as well.\\
+
+\textbf{Proof:} Let  $a\in\Rats$ such that $a = \frac{i}{j}$ where $i,j \in \Ints$ and $j \neq 0$. Also let $t\in\mathbb{I}$. Now suppose 
+for the contrary that both $a+t \in \Rats$. Note,
+\begin{align*}
+  a+t = \frac{i}{j} + t = \frac{n}{m}, 
+\end{align*}
+for some $n,m \in \Ints$ where $m \neq 0$. Through algebra we get that,
+\begin{align*}
+  \frac{i}{j} + t &= \frac{n}{m},\\
+  t &= \frac{n}{m} - \frac{i}{j},\\
+  &= \frac{jn - mi}{jm}.
+\end{align*}
+Note that, $jn - mi \in \Ints$ and $jm \neq 0$. Therefore $t \in \mathbb{I}$ and $t \notin \mathbb{I}$.\\
+Now suppose for the contrary that $t\in \Rats$. Note, 
+\begin{align*}
+  at = \frac{i}{j}t = \frac{n}{m}, 
+\end{align*}
+for some $n,m \in \Ints$ where $m \neq 0$.Through algebra we get that,
+\begin{align*}
+  \frac{i}{j}t &= \frac{n}{m}\\
+  t &= \frac{n}{m}\frac{j}{i}\\
+  &=\frac{nj}{mi}
+\end{align*}
+Note that, $nj, mi \in \Ints$ and $mi \neq 0$. Therefore $t \in \mathbb{I}$ and $t \notin \mathbb{I}$.
+\qed 
+\vspace{.5in}
+
+
+
+
+\item[\textbf{c.}] Part (a) says that the rational numbers are closed under multiplication
+and addition.  What can be said about $st$ and $s+t$ when $s,t\in\mathbb{I}$?\\
+
+\textbf{Proof:} We can show that the irrational numbers are not closed with respect to addition and multiplication. For a counterexample
+let $s = \sqrt{2}$ and $t = -\sqrt2$. Note that $s+t = 0$ which is rational, and $st = -2$ which is again a rational number.
+
+\end{enumerate}
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{First Edition 1.4.2}
+Let $A\subseteq \Reals$ be nonempty and bounded above. Let $s\in\Reals$ have
+the property that for all $n\in\Nats$, $s+(1/n)$ is an upper bound for $A$
+but $s-(1/n)$ is not an upper bound for $A$.  Show that $s=\sup A$.\\
+
+\textbf{Proof:} Let $A\subseteq \Reals$ be nonempty and bounded above also let $s\in\Reals$ have
+the property such that for all $n\in\Nats$, $s+(1/n)$ is an upper bound for $A$
+but $s-(1/n)$ is not an upper bound for $A$. Now suppose to the contrary that there exists $x \in A$ such that $x > s$. From the Archimedean Property we get
+that there exists an $n \in \Nats$ such that $\frac{1}{n}<x-s$. Note,
+\begin{align*}
+  \frac{1}{n}&<x-a\\
+  s + \frac{1}{n}&<x
+\end{align*}
+We have shown that $s + \frac{1}{n}$ is both an upper bound and not an upper bound, and thus by contradiction we have proven that for all 
+$x \in A$, $x \le s$. \\\\
+
+Suppose to the contrary that there exists some upper bound of $A$, $t$ such that $t < s$. From the Archimedean Property we get
+that there exists an $n \in \Nats$ such that $\frac{1}{n}<s-t$. Note,
+\begin{align*}
+  \frac{1}{n}&<s-t\\
+  t&<s-\frac{1}{n}
+\end{align*}
+We have shown that $s - \frac{1}{n}$ is both an upper bound and not an upper bound, and thus by contradiction we have proven that for all upper bounds $t$ of $A$, $s \le t$ 
+\qed
+\vspace{1in}
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{First Edition 1.4.3} Show that $\cap_{n=1}^\infty (0,1/n)=\emptyset$.\\
+
+  \textbf{Proof:} Suppose $A_n = (0,\frac{1}{n})$ and $A = \cap_{n=1}^\infty A_n$. Suppose there exists some $x \in A$. Note that by the definition
+  of $A_1 = (0,1)$, it is the case that $x > 0$. Recall that by the Archimedean Property we know that if $x > 0$, there exists an $m \in \Nats$ which satisfies,
+  \begin{equation*}
+    \frac{1}{m}<x.
+  \end{equation*}
+Therefore we know that for all $n \geq m$, $x \notin A_n$ and therefore $x \notin A$. 
+\qed
+  \vspace{1in}
+\end{exercise}
+
+
+\begin{exercise}{First Edition 1.4.4}
+
+Let $a<b$ be real numbers and let $T=[a,b]\cap\Rats$.
+Show that $\sup T=b$.\\
+
+\textbf{Proof:} Suppose $x \in T$. Note by the definition of $T$, $x \le b$ and thus $b$ is an upper bound.\\
+
+Suppose to the contrary that there exists an upper bound, $u$ for the set $T$ such that $u < b$. Recall that the Density of $\Rats$ in $\Reals$ shows us that between the two real numbers
+$u$ and $b$ there exists a rational number $r$ such that $u<r<b$. By definition $r \in T$ and therefore $u$ is not an upper bound. Thus we have shown that all upper bounds $u$, of $T$ satisfy $b \le u$ and tha $\sup A = b$.  
+\qed
+\vspace{1in}
+
+\end{exercise}
+
+
+
+
+
+
+\begin{exercise}{First Edition 1.4.5} Use Exercise 1.4.1 to provide a proof of Corollary 1.4.4 (Density of Rational Numbers) by considering real numbers $a-\sqrt{2}$ and $b-\sqrt{2}$.\\
+
+  \textbf{Proof:} Suppose that $a,b \in \Reals$ and that $a < b$. Consider the real numbers $a - \sqrt{2}$ and $b - \sqrt{2}$.
+  Note that by the Density of Rational Numbers Theorem we know that there exists $x \in \Rats$ such that,
+  \begin{equation*}
+    a - \sqrt{2}< x < b - \sqrt{2}.
+  \end{equation*} 
+  Through algebra we get,
+  \begin{equation*}
+    a < x + \sqrt{2} < b.
+  \end{equation*} 
+  Note that by Exercise 1.4.1 we know that $t = x + \sqrt{2} \in \mathbb{I}$. Thus there exist an irrational number $t$ satisfying $a<t<b$.
+\qed
+
+
+\end{exercise}
+
+
+
+\end{document}

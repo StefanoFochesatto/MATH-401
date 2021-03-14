@@ -1,0 +1,315 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ss%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 4}
+\docauthor{Stefano Fochesatto}
+\docdate{September 21, 2020}
+
+\begin{document}
+
+\begin{exercise}{Supplemental 1} 
+Show that the sequence $(-1)^n$ does not converge.
+\end{exercise}
+\begin{proof} Suppose for the sake of contradiction that the sequence $(-1)^n$ converges to $l$. By the definition of 
+	converges we know that for all tolerances $\epsilon \in \Reals$ there exists some $N\in \Nats$ such that for all $n \leq N$,
+	\begin{equation*}
+		|L - (-1)^n| < \epsilon.
+	\end{equation*}
+	Consider $\epsilon  = 2$ and suppose $(-1)^n = 1$, then,
+	\begin{align*}
+		|L - 1| &< \dfrac{1}{2},\\
+		-\dfrac{1}{2} < &L - 1 < \dfrac{1}{2},\\
+		\dfrac{1}{2} < &L < \dfrac{3}{2}.
+	\end{align*}
+	Now suppose that $(-1)^n = -1$
+	\begin{align*}
+		|L + 1| &< \dfrac{1}{2},\\
+		-\dfrac{1}{2}< &L + 1 < \dfrac{1}{2},\\
+		-1 < &L < -\dfrac{1}{2}.
+	\end{align*} 
+Clearly $L$ cannot exist in both $(-1,-\frac{1}{2})$ and $(\frac{1}{2}, \frac{3}{2})$ thus a contradiction. 
+\end{proof}
+
+\begin{exercise}{Supplemental 2} \strut
+\begin{enumerate}[(a)]
+	\item Show that for all $n\in\Nats$, $2^n\ge n$.
+	\item Show  that $\lim_{n\to\infty} 1/2^n = 0$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}[Part (a)]
+	Consider the case where $n = 1$. Clearly,
+	\begin{align*}
+		2^{(1)} &= 2\\ 
+		&\geq (1).
+	\end{align*}
+	Now we will proceed by induction on $n$. Suppose there exists some $n \in \Nats$ such that,
+	\begin{equation*}
+		2^n \geq n.
+	\end{equation*}
+	Now note that,
+	\begin{align*}
+		2^n &\geq n, \\
+		2^n + 1 &\geq n + 1,  \\
+		2^n + 2^n &\geq n + 1,\\
+		2^n2 &\geq n + 1,\\
+		2^{n+1} &\geq n + 1.
+	\end{align*} 
+	Thus by induction we have shown that for all $n \in \Nats $ $2^n \geq n$. 
+\end{proof}
+\begin{proof}[Part (b)] Let $\epsilon > 0$. Pick $N \in \Nats$ such that $\frac{1}{2^N} < \epsilon$. Then for all $n \geq N$,
+	\begin{align*}
+		|0 - \frac{1}{2^n}| &= \frac{1}{2^n},\\
+							&\le \frac{1}{2^N},\\
+							&< \epsilon.
+	\end{align*}
+	Thus the sequence $\frac{1}{2^n}$ converges to 0.  
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{2.2.2}
+From the definition, compute the given limits.
+\begin{enumerate}
+	\item[\textbf{a.}] 
+	\begin{equation*}
+		\lim \dfrac{2n+1}{5n+4} = \dfrac{2}{5}
+	\end{equation*} 
+	\item[\textbf{b.}]
+	\begin{equation*}
+		\lim \dfrac{2n^2}{n^3+3} = 0 
+	\end{equation*}
+	\item[\textbf{c.}] 
+	\begin{equation*}
+		\lim \dfrac{sin(n^2)}{n^\frac{1}{3}} = 0 
+	\end{equation*} 
+\end{enumerate}
+\end{exercise}
+\begin{proof}[Part (a)] let $\epsilon > 0$. Note that,
+	\begin{equation*}
+		|\dfrac{2}{5} - \dfrac{2n+1}{5n+4}| = \dfrac{3}{5(5n+4)} < \dfrac{3}{5n}.
+	\end{equation*}
+	Through Theorem 1.4.2(ii) we can pick $N \in \Nats$ such that $\dfrac{1}{N}<\dfrac{5\epsilon}{3}$. Then for all $n \geq N$,
+	\begin{align*}
+		|\dfrac{2}{5} - \dfrac{2n+1}{5n+4}| &= \dfrac{3}{5(5n+4)},\\
+		&<\dfrac{3}{5n},\\
+		&<\dfrac{3}{5N},\\
+		&< \epsilon.
+	\end{align*}
+	Thus the sequence $\frac{2n+1}{5n+4}$ converges to $\frac{2}{5}$.  
+\end{proof}
+\begin{proof}[Part (b)] let $\epsilon > 0$. Note that,
+	\begin{equation*}
+		|0 - \dfrac{2n^2}{n^3+3}| = \dfrac{2n^2}{n^3+3} \le \dfrac{2n^2}{n^3} = \dfrac{2}{n}.
+	\end{equation*}
+	Through Theorem 1.4.2(ii) we can pick $N \in \Nats$ such that $\dfrac{2}{N}<\epsilon$. Then for all $n \geq N$,
+	\begin{align*}
+		|0 - \dfrac{2n^2}{n^3+3}| &= \dfrac{2n^2}{n^3+3},\\
+		&\le \dfrac{2}{N},\\
+		&< \epsilon.
+	\end{align*}
+	Thus the sequence $\dfrac{2n^2}{n^3+3}$ converges to $0$.  
+\end{proof} 
+\begin{proof}[Part (c)]let $\epsilon > 0$. Note that the inequality,
+	\begin{equation*}
+		|0 - \dfrac{sin(n^2)}{n^\frac{1}{3}}| = \dfrac{sin(n^2)}{n^\frac{1}{3}} \le \dfrac{1}{n^\frac{1}{3}}. 
+	\end{equation*}
+	Through Theorem 1.4.2(ii) we can pick $N \in \Nats$ such that $\dfrac{1}{N}<\epsilon^3$. Then for all $n \geq N$,
+	\begin{align*}
+		|0 - \dfrac{sin(n^2)}{n^\frac{1}{3}}| &= \dfrac{sin(n^2)}{n^\frac{1}{3}},\\
+		&\le \dfrac{1}{n^\frac{1}{3}},\\
+		&\le \dfrac{1}{N^\frac{1}{3}},\\
+		&< \epsilon.
+	\end{align*}
+	Thus the sequence $\dfrac{sin(n^2)}{n^\frac{1}{3}}$ converges to $0$.  
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{2.2.3}
+Describe what needs to be shown to disprove the given statements.
+\end{exercise}
+\solution
+\begin{enumerate}[(a)]
+\item Find a college in the United States where every student is less than 7 feet tall.
+\item Find a college in the United States where no professor gives their students an $A$ or $B$.
+\item show that for all colleges in the United States, there exists some student who is less than 6 feet tall.
+\end{enumerate}
+
+\begin{exercise}{2.2.6}
+Prove Theorem 2.2.7. To get started, assume $(a_n) \to a$ and also that $(a_n) \to b$ and prove that $a = b$
+\end{exercise}
+\begin{proof} Suppose $(a_n)$ is a convergent series where $(a_n) \to a$ and also that $(a_n) \to b$. By the definition of convergence we know that
+	there exist some $\epsilon > 0$ where for $N_a\in \Nats$ , and that for all $n \geq N_a$ then, 
+	\begin{equation*}
+		|a - a_n| < \frac{\epsilon}{2}
+	\end{equation*}
+	Likewise there exists some $N_b\in \Nats$, where for all $n \geq N_b$ such that,
+	\begin{equation*}
+		|b - a_n| < \frac{\epsilon}{2}
+	\end{equation*} 
+	If $N = max\{N_a,N_b\}$ then for all $n \geq N$ we know that both inequalities hold. Now through some algebra and the triangle inequality we get,
+	\begin{align*}
+		|a - b| &= |a - a_n + a_n - b|\\
+		&\le |a - a_n| + |a_n - b|\\
+		&< \epsilon.
+	\end{align*}
+Note that we have shown that, 
+\begin{equation*}
+	|a - b| < \epsilon
+\end{equation*}
+is true for all $\epsilon > 0$ and thus as a consequence it must be the case that,
+\begin{align*}
+	|a - b| &= 0,\\
+	a &= b.
+\end{align*}
+\end{proof}
+
+\begin{exercise}{2.2.5(a)}
+Determine, with a proof, $\lim_{n\to\infty} [[5/n]]$.
+\end{exercise}
+\solution
+Claim: From calculating the first few numbers in the sequence I get,
+\begin{equation*}
+	5,2,1,1,1,0,0
+\end{equation*}
+Therefore I claim that $\lim_{n\to\infty} [[5/n]] = 0$
+
+\begin{proof} Let $\epsilon > 0$. Note that as long as we go out more than $5$ elements in the sequence then the convergence condition is satisfied. Let $N = 6$ and note that for all $n\geq N$,
+	\begin{align*}
+		|0 - [[5/n]]| &= [[5/n]],\\
+					&= [[5/N]],\\
+					&= 0,\\
+					&< \epsilon.
+	\end{align*} 
+Thus the sequence $[[5/n]]$ converges to 0.
+\end{proof}
+
+
+\begin{exercise}{2.3.9(a)(c)}
+\strut
+\begin{enumerate}
+	\item[(a)] If $(a_n)$ is a bounded sequence and $b_n\to 0$,
+	show $a_nb_n\to 0$.
+	\item[(c)] Prove Theorem 2.3.3(iii) for the case $a=0$.
+\end{enumerate}
+\end{exercise}
+\solution
+\begin{enumerate}
+	\item[(a)] 
+	\begin{proof} Suppose that $(a_n)$ is a bounded sequence and $b_n\to 0$. Since $(a_n)$ is bounded, there exists some $M \in \Reals$
+		such that $a_n \le M$ for all $n$. Since $b_n \to 0$ we know that for all $\epsilon > 0$ there exists some $N \in \Nats$ such that for all $n \geq N$, 
+		\begin{equation*}
+			|0 - b_n| = |b_n| < \frac{\epsilon}{M}.
+		\end{equation*} 
+		Through some algebra we can see that, 
+		\begin{align*}
+			|a_nb_n| &= |a_n||b_n|,\\
+			&\le M|b_n|,\\
+			&< M\dfrac{\epsilon}{M},\\ 
+			&= \epsilon.  
+		\end{align*}
+		Note that we have shown that, $|a_nb_n| < \epsilon$ thus $a_nb_n\to 0$.
+
+
+	\end{proof}
+	\item[(c)]
+	\begin{proof} Suppose a sequence $(a_n)$ and $(b_n)$ such that $a_n\to 0$ and $b_n\to b$. Note that since $b_n$ converges it must be bounded and therefore from the prevous proof we get
+		that,
+		\begin{equation*}
+	\lim a_nb_n = 0 = 0b.
+		\end{equation*}
+		
+	\end{proof}
+\end{enumerate}
+
+
+\end{document}

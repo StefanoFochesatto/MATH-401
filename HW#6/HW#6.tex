@@ -1,0 +1,430 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 6}
+\docauthor{Stefano Fochesatto}
+\docdate{\today}
+
+\begin{document}
+
+
+\begin{exercise}{2.4.5 (Modified, with hints!)}
+Suppose $x_1=2$ and define
+\[
+x_{n+1} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).
+\]
+\begin{enumerate}
+	\item Show that $x_n\ge 0$ for all $n$.\\
+	\solution We will proceed by induction on $n$. Suppose that for some $n\in \Nats$,
+	\begin{equation*}
+		x_n \geq 0.
+	\end{equation*}
+	Recall that by definition we know that,
+	\begin{equation*}
+		x_{n+1} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).
+	\end{equation*}
+	Through some algebra we get,
+	\begin{align*}
+		x_n &\geq 0\\
+		x_n + \frac{2}{x_n} &\geq 0\\
+		\frac{1}{2}\left(x_n + \frac{2}{x_n}\right) &\geq 0 \\
+		x_{n+1} &\geq 0.
+	\end{align*}
+Thus we have shown through induction that $x_n \geq 0$ for all values of $n$.
+\vspace{.25in}
+
+
+
+	\item Show that if $a>0$ then $a + \frac{1}{a} \ge 2$.
+	Hint: $(a-1)^2 \ge 0$.  [Your proof should highlight the part where you use the hypothesis $a>0$.]\\
+	\solution Suppose some $a \in \Reals$ such that $a>0$. Note that the square of any real number is zero or positive, thus we get that,
+	\begin{equation*}
+		(a-1)^2 \ge 0.
+	\end{equation*}
+	Through some algebra, and the fact that, $a>0$ we get,
+	\begin{align*}
+		(a-1)^2 &\ge 0,\\
+		a^2 - 2a + 1 &\ge 0,\\
+		a^2 + 1 &\ge 2a,\\
+		a + \frac{1}{a} &\ge 2.
+	\end{align*} 
+	Note that in the last step we can divide by $a$ since $a>0$ and for the same reason the direction of the inequality stays the same. 
+	\vspace{.25in}
+	
+	
+
+	
+	\item Show that if $b\neq 0$ then 
+	$b^2+4/b^2 \ge 4$. Hint: Use the previous item!\\
+
+	\solution Suppose some $b \in \Reals$ such that $b\neq 0$. Again note that the square of any real number is either zero or positive, thus we get,
+	\begin{equation*}
+		(b^2 - 2)^2\geq 0.
+	\end{equation*} 
+Through some algebra and the fact that $b \neq 0$ we get,
+\begin{align*}
+	(b^2 - 2)^2 &\geq 0,\\
+	b^4 - 4b^2 + 4 &\geq 0,\\
+	b^4 + 4 &\geq 4b^2,\\
+	b^2+4/b^2 &\geq 4.
+\end{align*}
+
+Note that in the last step we can divide by $b^2$ since $b \neq 0$ and since $b^2 > 0$ the direction of the inequality is unchanged.  
+\vspace{.25in}
+	
+
+
+	\item Show that $x_n^2 \ge 2$ for all $n$. Hint: Use the previous item!\\
+	\solution Note that $2^2 = 4 \geq 2$. We will proceed by induction on $n$. Suppose that for some $n \in \Nats$,
+	\begin{equation*}
+		x_n^2 \geq 2.
+	\end{equation*}
+	Now recall the definition of $x_{n+1}$,
+	\begin{equation*}
+		x_{n+1} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).
+	\end{equation*}
+	Squaring it, using the previous result, and the induction hypothesis we get,
+	\begin{align*}
+		x_{n+1}^2 &= \frac{1}{2}\left(x_n + \frac{2}{x_n}\right)^2,\\
+		&= \frac{1}{4}\left(x_n^2 + \frac{4}{x_n^2} + 4\right),\\
+		&\geq \frac{1}{4}(4 + 4),\\
+		&= 2.
+	\end{align*}
+Note that since $x_n^2 \geq 2$ we know that $x_n \neq 0$ and therefore by the previous problem we know that, 
+\begin{equation*}
+	(x_n^2 + \frac{4}{x_n^2}) \geq 4.
+\end{equation*} 
+Thus by induction we have show that $x_n^2 \geq 2$ for all $n \in \Nats$. 
+\vspace{.25in}
+
+
+
+
+
+	\item Show that $x_n \ge x_{n+1}$ for all $n$.  Hint: Use the previous item!\\
+	\solution Suppose that, $x_n^2 \geq 2$ and $x_n > 0$ for all $n \in \Nats$. Through some algebra we get,
+	\begin{align*}
+		x_n^2 &\geq 2,\\
+		0 &\geq \dfrac{2 - x_n^2}{2x_n},\\
+		0 &\geq \dfrac{1}{x_n} - \dfrac{x_n}{2},\\
+		0 &\geq \dfrac{1}{x_n} + \dfrac{x_n}{2} - x_n,\\
+		0 &\geq \dfrac{1}{2}\left(\dfrac{2}{x_n} + x_n\right) - x_n,\\
+		x_n &\geq \dfrac{1}{2}\left(\dfrac{2}{x_n} + x_n\right),\\
+		x_n &\geq x_{n+1}.
+	\end{align*}
+Note that step 2 of the algebra relies on the fact that $x_n > 0$, and the last step is a substitution by definition. Thus we have shown that $x_n \ge x_{n+1}$.
+\vspace{.25in}
+
+
+
+
+	\item Show that the sequence converges to a limit $L$.\\
+	\solution In step one we showed that the sequence $a_n$ is bounded below by 0 and in the previous step we demonstrated that the sequence
+	is monotone decreasing. Thus by the Monotone Convergence Theorem the sequence $(a_n)$ must converge to some limit $L$.
+	\vspace{.25in}
+
+
+	\item Show that $L\neq 0$. Hint: If $x_n\to 0$ then $x_n^2\to 0$.\\
+	\solution Suppose to the contrary that $L = 0$. Hence $x_n\to 0$. By the Algebraic Limit Theorem, consider computing
+	$\lim (x_n^2)$,
+	\begin{equation*}
+		\lim (x_n^2) = \lim (x_n)\lim (x_n) = L^2 = 0 
+	\end{equation*}   
+	Therefore by the definition of convergence we know that for all $\epsilon >0$ there exists an $N\in \Nats$ such that for all $n \geq N$,
+	\begin{equation*}
+		|a_n^2 - 0| = |a_n^2| = a_n^2 < \epsilon. 
+	\end{equation*}
+	However we have shown previously that $a_n^2 \geq 2$ contradicting the convergence. Thus it must be the case that $L \neq 0$.
+	\vspace{.25in}
+
+
+
+
+
+
+
+	\item Show that $L^2=2$. Hint: $\lim x_{n+1} = \lim x_n$.\\
+	\solution Suppose that $\lim x_n = L$. Consider taking the limit of our definition of $x_{n+1}$,
+	\begin{equation*}
+		\lim x_{n+1} = \lim  \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).
+	\end{equation*}
+	Note that by the fact that $\lim x_{n+1} = \lim x_n$, and the Algebreic Limit Theorem we can simplify the equation above,
+	\begin{align*}
+		\lim x_{n+1} &= \lim  \frac{1}{2}\left(x_n + \frac{2}{x_n}\right),\\
+		L &=  \frac{1}{2} \lim \left(x_n + \frac{2}{x_n}\right),\\
+		L &=  \frac{1}{2}  \left( \lim x_n + 2 \lim \frac{1}{x_n}\right),\\
+		L &=  \frac{1}{2}  \left( L + \frac{2}{L}\right),\\
+		L &=  \frac{L}{2} + \frac{1}{L},\\
+		2L &=  L + \frac{2}{L},\\
+		L &=  \frac{2}{L},\\
+		L^2 &=  2.
+	\end{align*}  
+\end{enumerate}
+\end{exercise}
+
+\vspace{.5in}
+
+
+
+
+
+
+
+\begin{exercise}{2.5.5} Assume $(a_n)$ is a bounded sequence with the property that every convergent subsequence of $(a_n)$ converges 
+	to the same limit $a \in \Reals$. Show that $(a_n)$ must converge to $a$.\\
+
+	\begin{proof}
+		Let $(a_n)$ be a bounded sequence with the property that every convergent subsequence of $(a_n)$ converges 
+		to the same limit $a \in \Reals$ and suppose to the contrary that $(a_n)$ does not converge to $a$. 
+		Hence there exists an $\epsilon > 0$ so than for all $N \in \Nats$ there exists an $n \geq N$ where,
+		\begin{equation*}
+			|a_n-a|\geq \epsilon.
+		\end{equation*} 
+		 Consider a subsequence $(a_{i_{j}})$ which satisfies the previous inequality. Note that by Theorem 2.5.2 it must converge to the same limit as $(a_n)$ and by definition that limit is not $a$, 
+		Note that $a_{i_{j}}$ converges to $a$ and also does not converge to $a$. 
+	\end{proof}
+
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{2.5.6} Use a similar strategy to the on in Example 2.5.3
+	to show that $\lim b^{1/n}$ exists for all $b \geq 0$ and find the value of the limit.( The results of 2.3.1 may be assumed.)\\
+
+
+\begin{proof}
+	Suppose the sequence $b_n = b^{1/n}$ and let $b \geq 0$. First consider where $b < 1$, and note that in this case the sequence is bounded below by 1 since for all
+	$b < 1$,
+	\begin{align*}
+		b &< 1,\\
+		b^{1/n} &< 1^{1/n} = 1.
+	\end{align*}
+	Now we will show that when $b < 1$, the sequence $b_n$ is monotone increasing for all $n \in \Nats$, through induction on $n$. 
+	Suppose that for some $n \in \Nats$,
+	\begin{equation*}
+		b^{1/n} \geq b^{1/(n-1)}.  
+	\end{equation*}
+	Using some algebra on our induction hypothesis we get,
+	\begin{align*}
+		b^{1/n} &\geq b^{1/(n-1)},\\
+		b^{1/(n+1) - 1/(n)}b^{1/n} &\geq b^{1/(n+1) - 1/(n)} b^{1/(n-1)},\\
+		b^{1/(n+1)} &\geq b^{(n^2 - 1)/(n-1)(n+1)(n)},\\
+		b^{1/(n+1)} &\geq b^{1/n}.
+	\end{align*}
+	Thus the sequence is monotone increasing when $b < 1$. By the Monotone Convergence Theorem, we know that
+	when $b < 1$ the sequence $b_n$ must converge to some limit $L$.\\
+
+	Now consider the case where $b \geq 1$, clearly the sequence wound then be bounded below by $1$ by a similar argument. Now through a similar induction argument we know that when $b \geq 1$, the sequence $b_n$ is monotone decreasing for all $n \in \Nats$ (replace the $\geq$ above with a $\leq$).
+	Therefore by the Monotone Convergence Theorem we know that when $b \geq 1$ the sequence $b_n$ must converge to some limit $L$. Thus $\lim b^{1/n}$ exists for all $b \geq 0$.\\
+
+	Now consider the subsequence, $b_{2n}$ which has the same limit,
+	\begin{equation*}
+		L = \lim b_{2n}  = \lim b^{1/(n)} \lim b^{1/(n)} = L^2.
+	\end{equation*}
+	Therefore it follows that in order to satisfy the equation, $L = 1, 0$ thus when $b_n \neq 0$ we know that $L = 1$. 
+\end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{2.5.7} Extend the result proved in Example 2.5.3 to the case where $|b|<1$; that is,
+	show that $\lim(b^n) = 0$ if and only if $-1< b < 1$. \\
+	\begin{proof}
+		Suppose that for $0 < b < 1$, the sequence $b_n = b^n$ converges to $\lim(b^n) = 0$. By the definition of convergence, we know that for 
+		$0 < b < 1$, and $\epsilon > 0$ there exists $N \in \Nats$ such that for all $n \geq N$,
+		\begin{equation*}
+			|b_n - 0| = |b^n - 0| = |b^n| = b^n < \epsilon.
+		\end{equation*}
+		Now consider the intermediate step,
+		\begin{equation*}
+			|b^n| = |b|^n< \epsilon.
+		\end{equation*}
+		Note that values of $-1< b < 1$ arrive at the same convergence.\\
+		
+		Suppose the sequence $b_n = b^n$ when $-1 < b < 1$. Note that for values of $b \in (-1,1)$ we know that the sequence returns the following,
+		\begin{equation*}
+			-|b|^n \leq b^n \leq |b|^n. 
+		\end{equation*}
+		Taking the limit of the inequality, simplifying with the Algebraic Limit Theorem, and substituting the result from Example 2.5.3 we get,
+		\begin{align*}
+			\lim(-|b|^n) \leq &\lim(b^n) \leq \lim(|b|^n),\\
+			-\lim(b^n) \leq &b^n \leq \lim(b^n),\\
+			0 \leq &b^n \leq 0.
+		\end{align*}
+Thus by Squeeze Theorem it follows that $\lim b_n = 0$. 
+	\end{proof}
+
+	
+\end{exercise}
+
+\vspace{.5in}
+
+
+
+
+\begin{exercise}{2.6.2} Give an example of each of the following, or argue that 
+	such a request is impossible.\\
+	\begin{enumerate}
+		\item A Cauchy sequence that is not monotone.\\
+		 \solution Consider the alternating sequence,
+		 \begin{equation*}
+			 x_n = \dfrac{(-1)^n}{n^2}.
+		 \end{equation*}
+		 The sequence converges and therefore it must be Cauchy, however it is clearly not monotone.
+		 \vspace{.25in}
+		 
+		\item A Cauchy sequence with an unbounded subsequence.\\
+		\solution From the Cauchy Criterion we know that all Cauchy sequences are convergent, and any subsequence of a convergent sequence is also convergent.\\
+		\vspace{.25in}
+
+		\item A divergent monotone sequence with a Cauchy subsequence.\\
+		\solution Suppose divergent monotone sequence $a_n$ with a Cauchy subsequence $a_{{n}_{i}}$ where
+		$\lim a_{{n}_{i}} = L$. let $a_j \in a_n$. Now consider the element $a_{{n}_{j}}$; the jth term of the Cauchy subsequence, since $a_n$
+		is monotone(WLOG increasing) it must be the case that $a_j \leq a_{{n}_{j}}$. Recall that $a_j \leq a_{{n}_{j}} \leq L$ thus $a_n$ is bounded above by $L$ and by MCT is convergent.
+		\vspace{.25in}
+
+		 \item An unbounded sequence containing a subsequence that is Cauchy.\\
+		 \solution Consider the following sequence,
+		 \[ a_n =  \begin{cases} 
+			\dfrac{1}{n^2} & \text{n is even} \\
+			n & \text{n is odd} 
+		 \end{cases}
+	  	\]
+		 The sequence is unbounded however the subsequence of even index is convergent and is therefore Cauchy. 
+	\end{enumerate}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+\begin{exercise}{2.6.7 (b)} Use the Cauchy Criterion to prove the Bolzano-Weierstrass Theorem, and
+	demonstrate where the archimedean property is implicitly required. \\
+	
+	\begin{proof}
+		Suppose that a sequence $a_n$ is bounded. Since $a_n$ is bounded there must exist an $M>0$ such that, 
+		$|a_n|\le M$ for all $n \in \Nats$. Bisecting the interval $[-M,M]$ into two closed intervals $[-M,0]$ and $[0,M]$. It must
+		be the case that at least one of those intervals contains an infinite number of terms of the sequence $a_n$, we will name that interval $l_1$. Performing the same operation again of
+		splitting the interval in 2 on $l_1$ to define $l_2$ and so forth until $l_n$. We define a subsequence $a_{{n}_i}$ where, $a_{n_{i}} \in l_i$. By construction we know that, for all $j>m\in \Nats$
+		\begin{equation*}
+			|a_{{n}_j} - a_{{n}_m}|<\dfrac{2M}{2^{m}}.
+		\end{equation*} 
+		Now we will show that,
+		\begin{equation*}
+		 \dfrac{2M}{2^{n}}
+		\end{equation*}
+
+		is convergent. Recall that in Supplemental Exercise 2 from HW4, we used the Archimedean Property to prove that,
+
+		\begin{equation*}
+			\lim \dfrac{1}{2^{n}} = 0.
+		\end{equation*}
+		Therefore by the Algebraic Limit Theorem we know that,
+		\begin{equation*}
+			\lim \dfrac{2M}{2^{n}} = 2M(0) = 0.
+		\end{equation*}
+		Therefore by the definition of convergence, for all $\epsilon > 0$ there exists some $N \in \Nats$ where for all $m \geq N$
+	\begin{equation*}
+		\dfrac{2M}{2^{m}} < \epsilon.
+	\end{equation*}
+	Thus it follows that, 
+	\begin{align*}
+			|a_{n_{j}} - a_{n_{m}}| &< \dfrac{2M}{2^{m}},\\
+			&\le \dfrac{2M}{2^{N}},\\
+			&<\epsilon.
+		\end{align*}
+Therefore the subsequence $a_{n_{i}}$ is Cauchy and by the Cauchy Criterion must converge. 
+	\end{proof}
+\end{exercise}
+\end{document}

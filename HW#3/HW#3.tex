@@ -1,0 +1,202 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 3}
+\docauthor{Stefano Fochesatto}
+\docdate{\today}
+
+\begin{document}
+
+
+\begin{exercise}{1.4.7} Finish the proof of Theorem 1.4.5 by
+showing that the assumption $\alpha^2>2$ contradicts the
+assumption that $\alpha=\sup A$.
+\end{exercise}
+\begin{proof} Consider the set,
+  \begin{equation*}
+    A = \{a \in \Reals : a^2<2\}.
+  \end{equation*}
+Let $\alpha = \sup A$. Suppose to the contrary that $\alpha^2>2$. Consider an element 
+of $A$ that is smaller than $\alpha$, like $(\alpha - \frac{1}{n})$, where $n > \frac{2\alpha}{\alpha^2 - 2}$.
+\begin{align*}
+  (\alpha - \frac{1}{n})^2 &= \alpha^2 - \frac{2\alpha}{n} + \frac{1}{n^2},\\
+  &> \alpha^2 - \frac{2\alpha}{n},\\
+  &> \alpha^2 - (\alpha^2 - 2),\\
+  &= 2.
+\end{align*}
+Thus we have shown that $ (\alpha - \frac{1}{n})$ is greater than $a$ for all $a \in A$ and therefore $ (\alpha - \frac{1}{n})$ is an upper bound.
+Since $(\alpha - \frac{1}{n})<\alpha$ we have contradicted $\alpha = \sup A$.
+
+
+\end{proof}
+
+\begin{exercise}{Supplemental 1} Give a from-scratch
+proof of the following facts:
+\begin{enumerate}[(a)]
+\item If $f:A\to B$ has an inverse function $g$, then
+$f$ is injective.
+\item If $f:A\to B$ has an inverse function $g$, then
+$f$ is surjective.
+\end{enumerate}
+\end{exercise}
+\begin{proof}[Proof (a)]
+Suppose $f:A\to B$, whose inverse is $g:B\to A$, now consider $a_i,a_j \in A$ such that $f(a_i) = f(a_j)$. Using $g$ as 
+an intermediary we get the equality,
+\begin{align*}
+  f(a_i) &= f(a_j),\\
+  g(f(a_i)) &= g(f(a_j)),\\
+  a_i &= a_j.
+\end{align*}
+Thus we have shown $f$ is an injective function.
+\end{proof}
+\begin{proof}[Proof (b)]
+  Suppose $f:A \to B$, whose inverse is $g:B \to A$. Consider some $b \in B$, by definition of $g$ we know that
+  there exists some $a \in A$ such that, $g(b) = a$. Taking the inverse of both sides we get,
+  \begin{align*}
+    f(g(b)) &= f(a)\\
+    b &= f(a).
+  \end{align*}
+  Since $a \in A$ we have shown that for every $b \in B$ there exists some $a \in A$ such that $f(a) = b$ thus $f$ is surjective. 
+\end{proof}
+
+\begin{exercise}{Supplemental 2} Show that the sets $[0,1)$ and $(0,1)$ have the same cardinality.\\
+  \begin{proof}
+    Suppose the function $f:[0,1) \to (0,1) $ defined by,
+  \[ f(x) = \begin{cases} 
+    1 - \frac{1}{n+1}  & 1 - \frac{1}{n},  n \in \Nats\\
+    x & \text{Otherwise} 
+ \end{cases}
+\]
+Suppose $a,b \in [0,1)$ such that $f(a) = f(b)$. For the case where $f(x) = x$ the function is trivially injective. let $a,b$ be of the form $1 - \frac{1}{n}$ such that,
+$a = 1 - \frac{1}{n}$ and $b = 1 - \frac{1}{m}$, where $n,m \in \Nats$. Now consider $f(a) = f(b)$, by definition,
+\begin{align*}
+  f(a) &= f(b),\\
+  1 - \frac{1}{n+1} &=  1 - \frac{1}{m+1},\\
+  \frac{1}{n+1} &= \frac{1}{m+1},\\
+  n+1 &= m+1,\\
+  n &= m.
+\end{align*} 
+Thus we have shown that $n = m$ and therefore by substitution $a = b$. Thus $f$ is injective.
+\vspace{.25in}
+
+
+
+Note that for the case where $f(x) = x$ the function is trivially surjective. Suppose some $b \in (0,1)$. Let $b$ be of the form $b = 1 - \frac{1}{n+1}$, where $n \in \Nats$. Consider $a = 1 - \frac{1}{n}$ and note that, $f(a) = b$. Observe that $a \in [0,1)$,
+thus $f$ is surjective.
+  \end{proof}
+\end{exercise}
+
+
+\begin{exercise}{1.5.10 (a) (c)}
+(Wait until after Wednesday to start this one)
+\begin{enumerate}[(a)] 
+	
+\item Let $C\subseteq[0,1]$ be uncountable.  Show that
+there exists $a\in(0,1)$ such that $C\cap [a,1]$ is uncountable.
+\item[(c)] Determine, with proof, if the same statement remains
+true replacing uncountable with infinite.
+\end{enumerate}
+\end{exercise}
+\begin{proof}[Proof (a)] Suppose $C \subseteq [0,1]$ is uncountable. Suppose for the sake of contradiction that for all $a \in (0,1)$,
+  $C \cap [a,1]$ is countable. Let $a = \frac{1}{n}$. Note that $C \cap [\frac{1}{n},1]$ is countable.  By Theorem 1.5.8 we know that since $C \cap [\frac{1}{n},1]$ is countable the infinite union is also countable. Through set theory
+  \begin{align*}
+    \bigcup_{n - 1}^{\infty} C \cap [\frac{1}{n},1] &= C \cap (\bigcup_{n - 1}^{\infty} [\frac{1}{n},1])\\
+    &=  C \cap (0,1]
+  \end{align*}
+Therefore, $C \cap (0,1] \cup \{0\} = C$ is also countable. 
+\end{proof}
+\begin{proof}[Proof (c)] Suppose the countably infinite set $C = \{\frac{1}{n}, n \in \Nats\}$. By Archimedean Principle we know that 
+  for all $a \in (0,1)$ we can find some $\frac{1}{n}<a$, and therefore we force the set $C \cap [a, 1]$ to be finite. 
+
+
+
+
+\end{proof}
+
+\begin{exercise}{Supplemental 3}
+(Wait until after Wednesday to start this one)
+Suppose for each $k\in\Nats$ that $A_k$ is at most countable.
+Use the fact that $\Nats\times\Nats$ is countably infinite to
+show that $\cup_{k=1}^\infty A_k$ is at most countable.  Hint:
+take advantage of surjection.
+\end{exercise}
+\begin{proof}
+  Suppose for each $k\in\Nats$ that $A_k$ is at most countable. Recall that since all $A_k$ are at most countable there must exists a surjection $g_k: \Nats \to A_k$.  Consider the function $f: \Nats\times\Nats \to \cup_{k=1}^\infty A_k$ defined such that,
+  $f(n,m) = g_n(m)$. Let $a \in \cup_{k=1}^\infty A_k$ and by definition we know that $a$ must exist in some set $A_i$, where $i \in \Nats$. Furthermore, since $g_i$, is a surjection we know that there exists some $j \in \Nats$ where $g_i(j) = a$. Therefore we know that $f(i,j) = g_i(j)$ where $i,j \in \Nats\times\Nats$. Thus $f$ is a surjection, and it follows that since
+   $\Nats\times\Nats$ is countably infinite then $ \cup_{k=1}^\infty A_k$ is at most countable. 
+\end{proof}
+
+\end{document}

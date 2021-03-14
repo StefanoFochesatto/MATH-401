@@ -1,0 +1,310 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 11}
+\docauthor{Stefano Fochesatto}
+\docdate{\today}
+
+\begin{document}
+
+\begin{exercise}{Abbott 5.2.5} Let,
+  \begin{equation*}
+   f_{a}(x) =  \begin{cases} 
+      x^a & x > 0 \\
+      0 & x \le 0 
+   \end{cases}
+  \end{equation*}\\
+  \begin{enumerate}
+    \item For which values of $a$ is $f$ continuous at zero?\\
+    \begin{proof}
+      Recall that in order for $f$ to be continuous at zero the right had limit of $f$ as $x \to 0^+$ must be,
+      \begin{equation*}
+        \lim_{x\to 0^+} x^a = 0.
+      \end{equation*}
+      Note that for any $a < 0$ the functional limit goes to infinity and for $a = 0$ we get $f(0) = 1$ for all $x > 0$
+      therefore it be that $f$ is continuous for all $a < 0$.
+    \end{proof}
+    \vspace{.25in}
+
+    \item for which values of $a$ is f differentiable at zero? In this case, is the derivative function continuous.\\
+    \begin{proof}
+      By definition, $f$ is continuous at zero if the following limit exists,
+      \begin{equation*}
+        f'(0) = \lim_{x \to 0} \dfrac{f(x) - f(0)}{x - 0}. 
+      \end{equation*}
+    Clearly we know that the left hand limit is $\lim_{x\to 0^-} f'(x) = 0$, since the function is constant there. Now consider the right hand limit
+    \begin{equation*}
+      \lim_{x \to 0^+} \dfrac{f(x) - f(0)}{x - 0} = \dfrac{x^a}{x} = x^{a-1}. 
+    \end{equation*}
+      Now let $b = a-1$ and note like in the previous problem $0^b = 0$ for all $b<0$, by substitution we get that $a<1$.
+      Thus we have shown that for all $a <1$,
+      \begin{equation*}
+        \lim_{x \to 0^+} f'(x)  = 0  = \lim_{x\to 0^-} f'(x) 
+      \end{equation*}
+      and thus $f$ is differentiable at zero. 
+    \end{proof}
+    \vspace{.25in}
+
+
+    \item For which values of $a$ is $f$ twice differentiable\\
+    \begin{proof}
+      Similarly to the previous problem we know that at $x = 0$ when the following limit exists,
+      \begin{equation*}
+        f''(0) = \lim_{x \to 0} \dfrac{f'(x) - f'(0)}{x - 0}
+      \end{equation*}
+      Again since $f$ is constant for all $x \le 0$ we know that $\lim_{x \to 0^-} f''(x) = 0$. Now considering the right hand limit and substituting $\lim_{x \to 0^+} f'(x) = \frac{x^a}{x}$,
+      \begin{equation*}
+        \lim_{x \to 0^+}  \dfrac{f'(x) - f'(0)}{x - 0} =  \dfrac{f'(x)}{x} =\dfrac{x^a}{x}\dfrac{1}{x} = \dfrac{x^a}{x^2} = x^{a-2}.  
+      \end{equation*}
+      By a similar algebraic argument as the previous problem we get that when $a > 2$,
+        \begin{equation*}
+          \lim_{x \to 0^+} f''(x)  = 0  = \lim_{x\to 0^-} f''(x) 
+        \end{equation*}
+        and thus $f$ is twice differentiable at zero. 
+
+
+    \end{proof}
+
+  \end{enumerate}
+
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+\begin{exercise}{Abbott 5.3.1(a)} Recall that from Exercise 4.4.9 that a function $f: A \to \Reals$ is 
+  Lipschitz on $a$ if there exists an $M > 0$ such that for all $x \neq y$ in $A$,
+  \begin{equation*}
+   \big| \dfrac{f(x) - f(y)}{x - y} \big| \le M
+  \end{equation*} 
+  Show that if $f$ is differentiable on closed interval $[a,b]$ and if $f'$ is continuous on $[a,b]$, then $f$ 
+  is Lipschitz on $[a,b]$.\\
+  
+  \begin{proof}
+    Suppose that $f: [a,b] \to \Reals$ is differentiable and $f':[a,b] \to \Reals $ is continuous. By the Mean Value Theorem 
+    we know that since $f$ is continuous and differentiable on $[a,b]$ there must exist some point $c \in (a,b)$, for all $x,y \in [a,b]$ that satisfies,
+    \begin{equation*}
+      f'(c) = \dfrac{f(x) - f(y)}{x - y}.
+    \end{equation*}
+    Now note that $f'$ is a continuous function defined on a compact set $[a,b]$ and therefore by the Extreme Value Theorem we know that there exists some 
+    $M \in |f'([a,b])|$ with the property that $|f'(x)| \le M$. Thus we get the following,
+    \begin{align*}
+      \big| \dfrac{f(x) - f(y)}{x - y} \big| &= |f'(c)|,\\
+      &\le M.
+    \end{align*} 
+  \end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+
+
+
+\begin{exercise}{Abbott 5.3.2} Let $f$ be differentiable on an interval $A$. If $f'(x) \neq 0$ on $A$, show that $f$ is one-to-one on $A$.
+  Provide an example to show that the converse statement need not be true.\\
+  \begin{proof}
+    Suppose that $f$ is differentiable on an interval $A$ and that $f'(x) \neq 0$ on $A$. Since $f'(x) \neq 0$ we know that $f$ must be either strictly increasing or strictly decreasing over $A$.
+    Without loss of generality let's suppose $f$ is strictly increasing over $A$. Suppose $x,y \in A$ such that $x \neq y$. Without loss of generality lets suppose that $x > y$. Since $f$ is a strictly increasing function if 
+    $x > y$ then it follows that $f(x) > f(y)$ and therefore $f(x) \neq f(y)$. Thus $f$ is one-to-one.\\
+  \end{proof}
+\vspace{.25in}
+
+  \solution For an example to show that the converse statement is not always true consider the piece-wise function on the interval $[1,3]$,
+  \begin{equation*}
+    f(x) =  \begin{cases} 
+      x & 1 \le x \le 2 \\
+      \frac{x}{2} - 1 & 2 < x \le 3 
+   \end{cases}
+  \end{equation*}
+  The function is trivially one-to-one, and since $f$ is discontinuous at $x = 2$ we know by the contrapositive statement of Theorem 5.2.3 that $f$ is not 
+  differentiable at $x = 2$. 
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+\begin{exercise}{Abbott 5.3.5(a)} Supply the details for the proof of Cauchy's Generalized Mean Value Theorem\\
+  \begin{proof}
+    Suppose functions $f$ and $g$ are continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$. We wish to demonstrate that 
+    there exists some $c \in (a,b)$ where,
+    \begin{equation*}
+      [f(b) - f(a)]g'(c) = [g(b) - g(a)]f'(c)
+    \end{equation*}
+    Consider the function,
+    \begin{equation*}
+      h(x) = [f(b) - f(a)]g(x) - [g(b) - g(a)]f(x). 
+    \end{equation*}
+    Note that since $h$ is composed of continuous and differentiable functions on the interval $[a,b]$ it is also continuous and differentiable on $[a,b]$.
+    Applying the Algebraic Differentiability Theorem to $h$ we get the following,
+    \begin{equation*}
+    h'(x) = [f(b) - f(a)]g'(x) - [g(b) - g(a)]f'(x).
+    \end{equation*}
+    Note that any solution $c$ for the first equation must also give $h'(c) = 0$. Now consider applying the Mean Value Theorem on $h(x)$, we get that there exists some $c \in (a,b)$ such that,
+    \begin{align*}
+      h'(c) &= \dfrac{ ([f(b) - f(a)]g(b) - [g(b) - g(a)]f(b)) - ([f(b) - f(a)]g(a) - [g(b) - g(a)]f(a))}{b - a}\\
+      &= \dfrac{ f(b)g(b) - f(a)g(b) - g(b)f(b) - g(a)f(b) + f(b)g(a) + f(a)g(a)  + g(b)f(a) - g(a)f(a) }{b - a}\\
+      &= \dfrac{0}{b - a}\\
+      &= 0
+    \end{align*}
+  Thus since there exists some $c \in (a,b)$ with the property that $h'(c) = 0$ and that
+  \begin{equation*}
+    [f(b) - f(a)]g'(c) = [g(b) - g(a)]f'(c).
+  \end{equation*}  
+  \end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+\begin{exercise}{Abbott 5.3.11(a)} Use the Generalized Mean Value Theorem to furnish a proof of the 0/0 case of 
+  L'Hospital's rule.\\
+
+  \begin{proof}
+    Suppose the continuous functions $f$ and $g$, defined over an interval $A$. Let $a \in A$ and suppose $f$ and 
+    $g$ are differentiable on $A\/\{a\}$. Also suppose that $f(a) = g(a) = 0$ and $g'(x) \neq 0$ for all $x\neq a$, and that the following limit exists,
+    \begin{equation*}
+      \lim_{x \to a} \dfrac{f'(x)}{g'(x)} = L.
+    \end{equation*}
+     Since the limit exists by the definition of functional limit we know the following,
+     \begin{equation*}
+      \lim_{x \to a} \dfrac{f'(x)}{g'(x)} = \dfrac{f'(a)}{g'(a)}.
+     \end{equation*}
+     By the definition of the Derivative,
+     \begin{equation*}
+      \lim_{x \to a} \dfrac{f'(x)}{g'(x)} = \dfrac{\lim_{x \to a}\frac{f(x) - f(a)}{x - a}}{\lim_{x \to a}\frac{g(x) - g(a)}{x - a}}.
+     \end{equation*} 
+     By the Algebraic Limit Theorem for Functional Limit and recalling that $f(a) = g(a) = 0$,
+     \begin{align*}
+      \lim_{x \to a} \dfrac{f'(x)}{g'(x)} &= \lim_{x \to a}\dfrac{\frac{f(x) - f(a)}{x - a}}{\frac{g(x) - g(a)}{x - a}},\\
+       &= \lim_{x \to a}\dfrac{f(x) - f(a)}{g(x) - g(a)},\\
+       &= \lim_{x \to a}\dfrac{f(x) - 0}{g(x) - 0},\\
+       &= \lim_{x \to a}\dfrac{f(x)}{g(x)}.
+     \end{align*} 
+  \end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+\begin{exercise}{Abbott 7.2.7} Let $f: [a,b] \to \Reals$ be monotone increasing on the set $[a,b]$ (i.e., $f(x) \le f(y)$ whenever $x < y$).
+  Show that $f$ is integrable on $[a,b]$\\
+
+  \begin{proof}
+    Suppose $f: [a,b] \to \Reals$ is monotone increasing on the set $[a,b]$. First note that by the Extreme Value Theorem and the fact that $[a,b]$
+    is a compact set we know that $f$ is a bounded function, and further since it it monotone increasing we know that $f(a) \le f(x) \le f(b)$ for all 
+    $x \in [a,b]$.\\
+    Now suppose some partition $P_\epsilon$ with nodes $a = x_0 < x_1 < \dots <x_n = b$, and note that since $f$ is monotone increasing the upper and lower Riemann sums are bounded by the following (Left and right Riemann sums),
+    \begin{equation*}
+      \sum_{i=1}^{n} f(x_{i - 1})\Delta x_i \leq L(f, P_\epsilon) \leq U(f, P_\epsilon) \leq \sum_{i=1}^{n} f(x_{i})\Delta x_i.
+    \end{equation*}  
+    Subtracting the bounded values we get that,
+    \begin{equation*}
+      \sum_{i=1}^{n} f(x_{i})\Delta x_i - \sum_{i=1}^{n} f(x_{i - 1})\Delta x_i = \sum_{i=1}^{n} f(x_{i}) - f(x_{i - 1})\Delta x_i.
+    \end{equation*}  
+    Let $M = Max\{\Delta x_i\}$, and through some algebra we can define an upperbound for the difference,
+    \begin{align*}
+      \sum_{i=1}^{n} f(x_{i})\Delta x_i - \sum_{i=1}^{n} f(x_{i - 1})\Delta x_i &= \sum_{i=1}^{n} f(x_{i}) - f(x_{i - 1})\Delta x_i,\\
+      &\le \sum_{i=1}^{n} f(x_{i}) - f(x_{i - 1})M,\\
+      &= M\sum_{i=1}^{n} f(x_{i}) - f(x_{i - 1}),\\
+      &= M(f(b) - f(a)).
+    \end{align*}
+Let $\epsilon > 0$. Now consider a partition $P_{\epsilon}$ such that $M(f(b) - f(a)) < \epsilon$. Note that when we consider the difference between the upper and lower sums,
+\begin{align*}
+  U(f, P_\epsilon) - L(f, P_\epsilon) &\le \sum_{i=1}^{n} f(x_{i})\Delta x_i - \sum_{i=1}^{n} f(x_{i - 1})\Delta x_i,\\
+   &\le M(f(b) - f(a),)\\
+   &< \epsilon.
+\end{align*}  
+  Thus by the Integrability Criterion $f$ is integrable on $[a,b]$.
+\end{proof}
+
+
+
+
+
+
+\end{exercise}
+
+\end{document}

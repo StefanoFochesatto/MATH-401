@@ -1,0 +1,250 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This top part of the document is called the 'preamble'.  Modify it with caution!
+%
+% The real document starts below where it says 'The main document starts here'.
+
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+
+% Comment the following line to use TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newtheoremstyle{homework}% name of the style to be used
+  {18pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {12pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {2ex}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{homework} 
+
+% Set up an Exercise environment and a Solution label.
+\newtheorem*{exercisecore}{Exercise \@currentlabel}
+\newenvironment{exercise}[1]
+{\def\@currentlabel{#1}\exercisecore}
+{\endexercisecore}
+
+\newcommand{\localhead}[1]{\par\smallskip\noindent\textbf{#1}\nobreak\\}%
+\newcommand\solution{\localhead{Solution:}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Stuff for getting the name/document date/title across the header
+\makeatletter
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[C]{\ifx\@docdate\@empty\else\@docdate\fi}
+\fancyhead[R]{\ifx\@docauthor\@empty\else\@docauthor\fi}
+\headheight 15pt
+
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\doclabel{Use {\tt\textbackslash doclabel\{MY LABEL\}}.}
+\def\docdate#1{\gdef\@docdate{#1}}
+\docdate{Use {\tt\textbackslash docdate\{MY DATE\}}.}
+\def\docauthor#1{\gdef\@docauthor{#1}}
+\docauthor{Use {\tt\textbackslash docauthor\{MY NAME\}}.}
+\makeatother
+
+% Shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\Reals}{\ensuremath{\mathbb R}}
+\newcommand{\Nats}{\ensuremath{\mathbb N}}
+\newcommand{\Ints}{\ensuremath{\mathbb Z}}
+\newcommand{\Rats}{\ensuremath{\mathbb Q}}
+\newcommand{\Cplx}{\ensuremath{\mathbb C}}
+\newcommand{\Irats}{\ensuremath{\mathbb I}}
+%% Some equivalents that some people may prefer.
+\let\RR\Reals
+\let\NN\Nats
+\let\II\Ints
+\let\CC\Cplx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% The main document start here.
+
+% The following commands set up the material that appears in the header.
+\doclabel{Math 401: Homework 9}
+\docauthor{Stefano Fochesatto}
+\docdate{November 2, 2020}
+
+\begin{document}
+
+\begin{exercise}{Abbott 4.3.9} Assume $h : \Reals \to \Reals$ is continuous on $\Reals$ and let $k = \{x : h(x) = 0\}$. Show that $k$
+  is a closed set.\\
+  \begin{proof} Suppose $h : \Reals \to \Reals$ is continuous on $\Reals$ and $k = \{x : h(x) = 0\}$. Let $x$ be a limit point of $k$, by 
+    Theorem 3.2.5 there exists a sequence $(a_n) \in k$ such that $lim a_n = x$ where $a_n \neq x$ for all $n \in \Nats$. By Theorem 4.3.2 (iii) since $h$ is continuous
+    for all $(a_n) \to x$ it follows that $h(a_n) \to h(x)$. Note that since $a_n \in k$ we know that $h(a_n) = 0$ for all $n$ and therefore we know that $h(x) = 0$ an thus by definition we get that $x \in k$. 
+    Thus $k$ contains all its limit points and is therefore closed. 
+  \end{proof}
+\end{exercise}
+
+\begin{exercise}{Supplemental 1}
+\begin{enumerate}[a)]
+\item Show that a continuous function on all of $\Reals$ that equals zero
+on the rational numbers must be the zero function\\
+\begin{proof}
+Suppose $f : \Reals \to \Reals$ is continuos and that for all $q \in \Rats$ we know that $f(q) = 0$. By Theorem 3.2.10 for every $x \in \Reals$
+there exists a sequence $(q_n) \in \Rats$ such that $(q_n) \to x$. By the continuity of $f$ we know that $f(q_n) \to f(x)$, since all $q_n \in \Rats$ by definition of $f$
+we know that $f(q_n) = 0$ and thus $f(x) = 0$ for all $x \in \Reals$.
+\end{proof}
+\vspace{.25in}
+
+\item Suppose $f$ and $g$ are two continuous functions on the real
+numbers. Is it true that if $f(q)=g(q)$ for all $q\in\Rats$, then $f$ and $g$
+are the same function?\\
+\begin{proof}
+  Suppose $f$ and $g$ are two continuous functions on the real numbers such that $f(q)=g(q)$ for all $q\in\Rats$. By Theorem 3.2.10 fir ever $x \in \Reals$
+  there exists a $(q_n) \in \Rats$ such that $(q_n) \to x$. By the continuity of $f$ and $g$ we know that $f(q_n) \to f(x)$ and  $g(q_n) \to g(x)$. Since $f(q) = g(q)$
+  we also get that $g(q_n) \to f(x)$ and $f(q_n) \to g(x)$. Finally by Theorem 2.2.7(Uniqueness of Limits) it must be the case that the limits are the same and we get 
+  $f(x) = g(x)$ for all $x \in \Reals$.
+\end{proof}
+\end{enumerate}	
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+\begin{exercise}{Supplemental 2} 
+ Suppose $K\subseteq \Reals$ is compact.  Show that
+there exists $x_M\in K$ such that $x_M\ge x$ for all $x\in K$.  Then,
+with very little work, show that there exists $x_m\in K$ such
+that $x_m \le x$ for all $x\in K$.
+
+\begin{proof}
+  Suppose that $K\subseteq \Reals$ is compact. By the definition of compact we know that $k$ is closed and bounded.
+  Since $K$ is bounded we know that there exists some $x_M = Sup K$. Now consider every $\epsilon$-neighborhood of $x_M$. By 
+  Lemma 1.3.8 we know that for every $\epsilon>0$, there exists some $x \in K$ such that $x_M - \epsilon < x < x_M$. So we know that $x \in V_\epsilon(x_M)\cap K/\{x_M\}$ and thus by definition $x_M$ is a limit point of $K$
+  and since $K$ is closed we know that $x_M \in K$\\
+
+  Since $K$ is bounded there also exists an $x_m = Inf K$. By Lemma 1.3.8 we know that for every $\epsilon>0$, there exists some $x \in K$ such that $x_m < x < x_m + \epsilon$
+  So we know that $x \in V_\epsilon(x_m)\cap K/\{x_m\}$ and thus by definition $x_m$ is a limit point of $K$ and since $K$ is closed we know that $x_m \in K$
+\end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+
+\begin{exercise}{Abbott 4.3.7(a)}Referring to the proper theorems, 
+give a formal argument that Dirichlet’s function from Section 4.1 is nowhere-continuous on $\Reals$.\\
+
+\begin{proof}
+  Consider the Dirichlet’s function $f: \Reals \to \Reals$ where,
+  \begin{equation*}
+    f(x) = 
+    \begin{cases} 
+      1 & x \in \Rats \\
+      0 & x \notin \Rats 
+   \end{cases}
+  \end{equation*}
+  Consider the $i \in \Irats$, by Theorem 3.2.10 (Density of $\Rats$ in $\Reals$) we can construct a sequence
+  $q_n \in \Rats$ such that $q_n \to i$. Suppose for the sake of contradiction that $f$ is continuous on all $i \in \Irats$ then
+  by continuity it must be the case that since $q_n \to i$ then $f(q_n) \to f(i)$, however $f(q_n)$ is a constant sequence of 1 and $f(i) = 0$ therefore $f(q_n) \not\to f(i)$. Thus by contradiction $f$ is not continuous on $\Irats$
+
+Similarly consider $q \in \Rats$, and constructing a sequence $i_n \in \Irats$ such that $i_n \to q$. Supposing that $f$ is continuous on all $q \in \Rats$ then by continuity
+we it must be the case that since $i_n \to q$ then $f(i_n) \to f(q)$ however $f(i_n)$ is a constant sequence of 0 and $f(q) = 1$ therefore by contradiction $f$ is not continuous on $\Rats$.
+\end{proof}
+\end{exercise}
+\vspace{.5in}
+
+
+
+
+
+\begin{exercise}{Abbott 4.4.6} Give an example of each of the following, or state that such a request is impossible.
+  for any that are impossible, supply a short explanation for why this is the case.\\
+
+  \begin{enumerate}
+    \item A continuous function $f: (0,1) \to \Reals$ and a Cauchy sequence $(x_n)$ such that $f(x_n)$ is not a cauchy sequence.\\
+    \solution Let $f(x) = \frac{1}{x}$ and consider the cauchy sequence $x_n =\frac{1}{n!}$. Note that $f(x_n) = n!$ which is clearly not convergent and is therefore not a cauchy sequence. 
+    \vspace{.25in}
+
+    \item A uniformly continuous function $f: (0,1) \to \Reals$ and a Cauchy sequence $(x_n)$ such that $f(x_n)$ is not a cauchy sequence.\\
+    \solution Suppose $f: (0,1) \to \Reals$ and a Cauchy sequence $(x_n)$ and for the sake of contradiction suppose $f(x_n)$ is not cauchy. By definition there exists some
+    (bad) $epsilon$ such that for every $N \in \Nats$ for all $n,m \geq N$ we know that $|f(x_n) - f(x_m)| \geq \epsilon$. However since $x_n$ is cauchy and $f$ is continuous we know that 
+    $|x_n - x_m| \to 0$ then $|f(x_n) - f(x_m)| \to 0$ thus by contradiction $f$ cannot be uniformly continuous.
+    \vspace{.25in}
+
+    \item A continuous function $f: [0,\infty) \to \Reals$ and a Cauchy sequence $(x_n)$ such that $f(x_n)$ is not a cauchy sequence.\\
+    \solution This request is impossible, note that the set $[0,\infty)$ is closed and therefore by Theorem 3.2.8 we know that $x_n \to L$ where $L \in [0,\infty)$.
+    By continuity we get that $f(x_n) \to f(L)$ and since $f(x_n)$ is a convergent sequence it is also cauchy. 
+  \end{enumerate}
+\end{exercise} 
+\vspace{.5in}
+
+
+\begin{exercise}{Abbott 4.4.9} A function $f: A \to \Reals$ is called $Lipschitz$ is there exists a bound $M>0$ such that,
+  \begin{equation*}
+    |\dfrac{f(x) - f(y)}{x - y}|\le M.
+  \end{equation*}
+for all $x \neq y \in A$. Geometrically speaking, a function $f$ is $Lipschitz$ if there is a uniform bound on the magnitude
+of the sloped of lines drawn through any two points on the graph of $f$,\\
+
+
+\begin{enumerate}
+  \item Show that if $f: A \to \Reals$ is $Lipschitz$, then it is uniformly continuous on $A$.\\
+  \begin{proof}
+    Suppose that $f: A \to \Reals$ is $Lipschitz$. By the definition of a $Lipschitz$ function we know that for all $x,y \in A$ there
+    exists some $M$ such that,
+    \begin{equation*}
+      |f(x) - f(y)| \le M|x - y|.
+    \end{equation*}
+    Let $\epsilon > 0$, now consider $\delta = \frac{\epsilon}{M}$ therefore whenever $|x - y|<\delta$ we get,
+    \begin{align*}
+      |x - y| &< \delta,\\
+      M|x - y| &< M\delta,\\
+      |f(x) - f(y)| &< \epsilon.
+    \end{align*}
+    Thus $f$ is uniformly continuous on $A$.
+  \end{proof}
+  \vspace{.25in}
+
+
+
+  \item Is the converse statement true? Are all uniformly continuous functions necessarily $Lipschitz$?\\
+  \begin{proof}
+    Consider the function $f: [0,1] \to [0,1]$ such that $f(x) =\sqrt{x}$. We demonstrated in class that $f$ is uniformly continuous. Suppose 
+    for the sake of contradiction that $f$ is $Lipschitz$, we would get the following inequality for all $x,y \in [0,1]$ and some $M>0$,
+    \begin{equation*}
+      |\sqrt{x} - \sqrt{y}|\le M|x - y|
+    \end{equation*}
+    Let $x = 0$ and $y = \frac{1}{2M^2}$ we get the following by substitution,
+    \begin{align*}
+      |\sqrt{x} - \sqrt{y}|&\le M|x - y|,\\
+      \frac{1}{2M}&\le \frac{M}{4M^2},\\
+      \frac{1}{2M}&\le \frac{1}{4M}.
+    \end{align*}
+    Thus by contradiction $f$ is not $Lipschitz$. As demonstrated in class we can see that as $x$ approaches 0 the slope increases to infinity and is therefore unbounded.  
+  \end{proof}
+  
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+\end{exercise}
+
+\end{document}
